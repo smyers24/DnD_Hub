@@ -26,18 +26,19 @@ namespace DnD_Hub
             int result = 0;
             for (int i=0; i<numberOfRolls; i++)
             {
-                result += roll.Next(dieValue + 1);
+                result += roll.Next(1, dieValue + 1);
             }
             return result;
         } 
-       
-        
-        private void manualRoll(int die)
-        {
-
-        }
+      
 
         private void manualRoll(object sender, MouseEventArgs e)
+        {
+            rollCalc(sender);
+             
+        }
+
+        private int rollCalc(object sender)
         {
             Button dieButton = sender as Button;
             bool validRollQty;
@@ -54,20 +55,31 @@ namespace DnD_Hub
                 rollQuantity = rollQty;
             else
                 rollQuantity = 1;
+            int result = roll(rollQuantity, dieValue);
 
-            Console.WriteLine(roll(rollQuantity, dieValue));
-             
+            return result;
         }
 
         private void rollConcat(object sender, EventArgs e)
         {
             TextBox diceBox = new TextBox();
+            int rollQty;
+            int total = 0;
             foreach (String box in diceTBlist)
             {
-                diceBox.Name = box;
-                if di
+
+                TextBox tbx = this.Controls.Find(box, true).FirstOrDefault() as TextBox;
+                if (tbx.Text != "")
+                {
+                    total += rollCalc(tbx);
+                    Console.WriteLine(total);
+                    bool validRollQty = int.TryParse(tbx.Text, out rollQty);
+                    diceBox.Name = box;
+                }
+              //  if di
             }
 
         }
+
     }
 }

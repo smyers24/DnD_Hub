@@ -1,4 +1,3 @@
-Q:\Coding\GitHub\DnD_Hub\DnD_Hub\obj\Debug\DnD_Hub.csprojResolveAssemblyReference.cache
 Q:\Coding\GitHub\DnD_Hub\DnD_Hub\obj\Debug\DnD_Hub.Form1.resources
 Q:\Coding\GitHub\DnD_Hub\DnD_Hub\obj\Debug\DnD_Hub.Properties.Resources.resources
 Q:\Coding\GitHub\DnD_Hub\DnD_Hub\obj\Debug\DnD_Hub.csproj.GenerateResource.Cache
@@ -8,3 +7,4 @@ Q:\Coding\GitHub\DnD_Hub\DnD_Hub\bin\Debug\DnD_Hub.exe
 Q:\Coding\GitHub\DnD_Hub\DnD_Hub\bin\Debug\DnD_Hub.pdb
 Q:\Coding\GitHub\DnD_Hub\DnD_Hub\obj\Debug\DnD_Hub.exe
 Q:\Coding\GitHub\DnD_Hub\DnD_Hub\obj\Debug\DnD_Hub.pdb
+Q:\Coding\GitHub\DnD_Hub\DnD_Hub\obj\Debug\DnD_Hub.csprojAssemblyReference.cache
