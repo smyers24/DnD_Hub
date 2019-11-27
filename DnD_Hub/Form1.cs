@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.Diagnostics;
 
 namespace DnD_Hub
 {
@@ -24,18 +26,20 @@ namespace DnD_Hub
         {
             Random roll = new Random();
             int result = 0;
-            for (int i=0; i<numberOfRolls; i++)
+            for (int i = 0; i < numberOfRolls; i++)
             {
                 result += roll.Next(1, dieValue + 1);
             }
+            Console.WriteLine(result);
             return result;
-        } 
-      
+
+        }
+
 
         private void manualRoll(object sender, MouseEventArgs e)
         {
             rollCalc(sender);
-             
+
         }
 
         private int rollCalc(object sender)
@@ -76,10 +80,51 @@ namespace DnD_Hub
                     bool validRollQty = int.TryParse(tbx.Text, out rollQty);
                     diceBox.Name = box;
                 }
-              //  if di
+                //  if di
             }
 
         }
 
+        private void openListOfThings(object sender, EventArgs e)
+        {
+            openedItemsListBox.Items.Clear();
+            string[] files = Array.Empty<string>();
+            OpenFileDialog fileDialog = new OpenFileDialog();
+          //  var fullFilePath = fileDialog.FileName;
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                files = File.ReadAllLines(fileDialog.FileName);
+            }
+            foreach (string file in files)
+            {
+                openedItemsListBox.Items.Add(file);
+                OpenFileWithDefault(file);
+                Console.WriteLine(file);
+            }
+        }
+
+        private void ropenItemFromList(object sender, EventArgs e)
+        {
+            if (openedItemsListBox.SelectedItem != null)
+            {
+                Console.WriteLine(openedItemsListBox.SelectedItem.ToString());
+            }
+            openedItemsListBox.ClearSelected();
+        }
+
+        private void OpenFileWithDefault(string fileName)
+        {
+            Process fileopener = new Process();
+            try
+            {
+                fileopener.StartInfo.FileName = fileName;
+                fileopener.Start();
+                fileopener.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Invalid file selection: " + fileName);
+            }
+        }
     }
 }

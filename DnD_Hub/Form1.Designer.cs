@@ -74,9 +74,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.fileGroupBox = new System.Windows.Forms.GroupBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.openedItemsListBox = new System.Windows.Forms.ListBox();
+            this.openListBtn = new System.Windows.Forms.Button();
             this.rollGroupBox.SuspendLayout();
             this.diceGroupBox.SuspendLayout();
             this.characterGroupBox.SuspendLayout();
@@ -507,9 +506,8 @@
             // 
             // fileGroupBox
             // 
-            this.fileGroupBox.Controls.Add(this.listBox1);
-            this.fileGroupBox.Controls.Add(this.button7);
-            this.fileGroupBox.Controls.Add(this.button6);
+            this.fileGroupBox.Controls.Add(this.openedItemsListBox);
+            this.fileGroupBox.Controls.Add(this.openListBtn);
             this.fileGroupBox.Location = new System.Drawing.Point(336, 12);
             this.fileGroupBox.Name = "fileGroupBox";
             this.fileGroupBox.Size = new System.Drawing.Size(231, 181);
@@ -517,31 +515,24 @@
             this.fileGroupBox.TabStop = false;
             this.fileGroupBox.Text = "File Management";
             // 
-            // listBox1
+            // openedItemsListBox
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(7, 48);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(209, 121);
-            this.listBox1.TabIndex = 4;
+            this.openedItemsListBox.FormattingEnabled = true;
+            this.openedItemsListBox.Location = new System.Drawing.Point(7, 48);
+            this.openedItemsListBox.Name = "openedItemsListBox";
+            this.openedItemsListBox.Size = new System.Drawing.Size(209, 121);
+            this.openedItemsListBox.TabIndex = 4;
+            this.openedItemsListBox.DoubleClick += new System.EventHandler(this.ropenItemFromList);
             // 
-            // button7
+            // openListBtn
             // 
-            this.button7.Location = new System.Drawing.Point(121, 19);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 23);
-            this.button7.TabIndex = 3;
-            this.button7.Text = "Open";
-            this.button7.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(7, 19);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(108, 23);
-            this.button6.TabIndex = 3;
-            this.button6.Text = "Things to Open";
-            this.button6.UseVisualStyleBackColor = true;
+            this.openListBtn.Location = new System.Drawing.Point(46, 19);
+            this.openListBtn.Name = "openListBtn";
+            this.openListBtn.Size = new System.Drawing.Size(108, 23);
+            this.openListBtn.TabIndex = 3;
+            this.openListBtn.Text = "Open List of Things";
+            this.openListBtn.UseVisualStyleBackColor = true;
+            this.openListBtn.Click += new System.EventHandler(this.openListOfThings);
             // 
             // Form1
             // 
@@ -577,7 +568,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox fileGroupBox;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button openListBtn;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.TextBox textBoxD20Extra;
         private System.Windows.Forms.TextBox textBoxD10Extra;
@@ -609,8 +600,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label acLabel;
         private System.Windows.Forms.TextBox charNameTB;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.ListBox openedItemsListBox;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button9;
