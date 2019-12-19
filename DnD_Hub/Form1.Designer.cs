@@ -33,6 +33,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.rollGroupBox = new System.Windows.Forms.GroupBox();
+            this.rollChest = new System.Windows.Forms.ListBox();
             this.diceGroupBox = new System.Windows.Forms.GroupBox();
             this.d4RollNum = new System.Windows.Forms.TextBox();
             this.textBoxD20Extra = new System.Windows.Forms.TextBox();
@@ -62,6 +63,9 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.addCustomRoll = new System.Windows.Forms.Button();
+            this.modifyCustomRoll = new System.Windows.Forms.Button();
+            this.deleteCustomRoll = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.characterGroupBox = new System.Windows.Forms.GroupBox();
@@ -75,16 +79,24 @@
             this.label1 = new System.Windows.Forms.Label();
             this.fileGroupBox = new System.Windows.Forms.GroupBox();
             this.openedItemsListBox = new System.Windows.Forms.ListBox();
+            this.mapSelection = new System.Windows.Forms.Button();
             this.openListBtn = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.mapBrowser = new System.Windows.Forms.WebBrowser();
             this.rollGroupBox.SuspendLayout();
             this.diceGroupBox.SuspendLayout();
             this.characterGroupBox.SuspendLayout();
             this.fileGroupBox.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(6, 42);
+            this.button1.Location = new System.Drawing.Point(658, 208);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
@@ -93,7 +105,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(88, 42);
+            this.button2.Location = new System.Drawing.Point(740, 208);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(94, 23);
             this.button2.TabIndex = 1;
@@ -102,7 +114,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(6, 71);
+            this.button3.Location = new System.Drawing.Point(658, 237);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 0;
@@ -111,7 +123,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(98, 71);
+            this.button4.Location = new System.Drawing.Point(750, 237);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 1;
@@ -120,21 +132,30 @@
             // 
             // rollGroupBox
             // 
+            this.rollGroupBox.Controls.Add(this.rollChest);
             this.rollGroupBox.Controls.Add(this.diceGroupBox);
             this.rollGroupBox.Controls.Add(this.checkBox1);
             this.rollGroupBox.Controls.Add(this.label10);
             this.rollGroupBox.Controls.Add(this.textBox1);
+            this.rollGroupBox.Controls.Add(this.addCustomRoll);
+            this.rollGroupBox.Controls.Add(this.modifyCustomRoll);
+            this.rollGroupBox.Controls.Add(this.deleteCustomRoll);
             this.rollGroupBox.Controls.Add(this.button9);
-            this.rollGroupBox.Controls.Add(this.button3);
-            this.rollGroupBox.Controls.Add(this.button4);
-            this.rollGroupBox.Controls.Add(this.button1);
-            this.rollGroupBox.Controls.Add(this.button2);
-            this.rollGroupBox.Location = new System.Drawing.Point(12, 199);
+            this.rollGroupBox.Location = new System.Drawing.Point(22, 208);
             this.rollGroupBox.Name = "rollGroupBox";
             this.rollGroupBox.Size = new System.Drawing.Size(555, 264);
             this.rollGroupBox.TabIndex = 2;
             this.rollGroupBox.TabStop = false;
             this.rollGroupBox.Text = "Roll";
+            // 
+            // rollChest
+            // 
+            this.rollChest.FormattingEnabled = true;
+            this.rollChest.Location = new System.Drawing.Point(6, 19);
+            this.rollChest.Name = "rollChest";
+            this.rollChest.Size = new System.Drawing.Size(262, 95);
+            this.rollChest.TabIndex = 4;
+            this.rollChest.DoubleClick += new System.EventHandler(this.ropenItemFromList);
             // 
             // diceGroupBox
             // 
@@ -168,7 +189,7 @@
             this.diceGroupBox.Size = new System.Drawing.Size(216, 239);
             this.diceGroupBox.TabIndex = 7;
             this.diceGroupBox.TabStop = false;
-            this.diceGroupBox.Text = "Dice";
+            this.diceGroupBox.Text = "Dice Box";
             // 
             // d4RollNum
             // 
@@ -381,7 +402,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(43, 19);
+            this.checkBox1.Location = new System.Drawing.Point(195, 184);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(73, 17);
             this.checkBox1.TabIndex = 6;
@@ -401,12 +422,40 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(10, 182);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(116, 20);
+            this.textBox1.Size = new System.Drawing.Size(163, 20);
             this.textBox1.TabIndex = 5;
+            // 
+            // addCustomRoll
+            // 
+            this.addCustomRoll.Location = new System.Drawing.Point(6, 120);
+            this.addCustomRoll.Name = "addCustomRoll";
+            this.addCustomRoll.Size = new System.Drawing.Size(75, 23);
+            this.addCustomRoll.TabIndex = 3;
+            this.addCustomRoll.Text = "Add";
+            this.addCustomRoll.UseVisualStyleBackColor = true;
+            this.addCustomRoll.Click += new System.EventHandler(this.addSavedRoll);
+            // 
+            // modifyCustomRoll
+            // 
+            this.modifyCustomRoll.Location = new System.Drawing.Point(98, 120);
+            this.modifyCustomRoll.Name = "modifyCustomRoll";
+            this.modifyCustomRoll.Size = new System.Drawing.Size(75, 23);
+            this.modifyCustomRoll.TabIndex = 3;
+            this.modifyCustomRoll.Text = "Modify";
+            this.modifyCustomRoll.UseVisualStyleBackColor = true;
+            // 
+            // deleteCustomRoll
+            // 
+            this.deleteCustomRoll.Location = new System.Drawing.Point(193, 120);
+            this.deleteCustomRoll.Name = "deleteCustomRoll";
+            this.deleteCustomRoll.Size = new System.Drawing.Size(75, 23);
+            this.deleteCustomRoll.TabIndex = 3;
+            this.deleteCustomRoll.Text = "Delete";
+            this.deleteCustomRoll.UseVisualStyleBackColor = true;
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(32, 208);
+            this.button9.Location = new System.Drawing.Point(10, 217);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(75, 23);
             this.button9.TabIndex = 3;
@@ -433,7 +482,7 @@
             this.characterGroupBox.Controls.Add(this.label2);
             this.characterGroupBox.Controls.Add(this.label1);
             this.characterGroupBox.Controls.Add(this.button5);
-            this.characterGroupBox.Location = new System.Drawing.Point(12, 12);
+            this.characterGroupBox.Location = new System.Drawing.Point(22, 21);
             this.characterGroupBox.Name = "characterGroupBox";
             this.characterGroupBox.Size = new System.Drawing.Size(318, 181);
             this.characterGroupBox.TabIndex = 4;
@@ -507,8 +556,9 @@
             // fileGroupBox
             // 
             this.fileGroupBox.Controls.Add(this.openedItemsListBox);
+            this.fileGroupBox.Controls.Add(this.mapSelection);
             this.fileGroupBox.Controls.Add(this.openListBtn);
-            this.fileGroupBox.Location = new System.Drawing.Point(336, 12);
+            this.fileGroupBox.Location = new System.Drawing.Point(346, 21);
             this.fileGroupBox.Name = "fileGroupBox";
             this.fileGroupBox.Size = new System.Drawing.Size(231, 181);
             this.fileGroupBox.TabIndex = 4;
@@ -520,9 +570,19 @@
             this.openedItemsListBox.FormattingEnabled = true;
             this.openedItemsListBox.Location = new System.Drawing.Point(7, 48);
             this.openedItemsListBox.Name = "openedItemsListBox";
-            this.openedItemsListBox.Size = new System.Drawing.Size(209, 121);
+            this.openedItemsListBox.Size = new System.Drawing.Size(209, 95);
             this.openedItemsListBox.TabIndex = 4;
             this.openedItemsListBox.DoubleClick += new System.EventHandler(this.ropenItemFromList);
+            // 
+            // mapSelection
+            // 
+            this.mapSelection.Location = new System.Drawing.Point(46, 149);
+            this.mapSelection.Name = "mapSelection";
+            this.mapSelection.Size = new System.Drawing.Size(108, 23);
+            this.mapSelection.TabIndex = 3;
+            this.mapSelection.Text = "Open Map";
+            this.mapSelection.UseVisualStyleBackColor = true;
+            this.mapSelection.Click += new System.EventHandler(this.openMap);
             // 
             // openListBtn
             // 
@@ -534,15 +594,60 @@
             this.openListBtn.UseVisualStyleBackColor = true;
             this.openListBtn.Click += new System.EventHandler(this.openListOfThings);
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(858, 635);
+            this.tabControl1.TabIndex = 5;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.characterGroupBox);
+            this.tabPage1.Controls.Add(this.fileGroupBox);
+            this.tabPage1.Controls.Add(this.rollGroupBox);
+            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.button2);
+            this.tabPage1.Controls.Add(this.button3);
+            this.tabPage1.Controls.Add(this.button4);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(850, 609);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.mapBrowser);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(850, 609);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // mapBrowser
+            // 
+            this.mapBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mapBrowser.Location = new System.Drawing.Point(3, 3);
+            this.mapBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.mapBrowser.Name = "mapBrowser";
+            this.mapBrowser.Size = new System.Drawing.Size(844, 603);
+            this.mapBrowser.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(631, 483);
-            this.Controls.Add(this.fileGroupBox);
-            this.Controls.Add(this.characterGroupBox);
-            this.Controls.Add(this.rollGroupBox);
+            this.ClientSize = new System.Drawing.Size(903, 666);
+            this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.rollGroupBox.ResumeLayout(false);
@@ -552,6 +657,9 @@
             this.characterGroupBox.ResumeLayout(false);
             this.characterGroupBox.PerformLayout();
             this.fileGroupBox.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -606,6 +714,15 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.GroupBox diceGroupBox;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.WebBrowser mapBrowser;
+        private System.Windows.Forms.Button mapSelection;
+        private System.Windows.Forms.ListBox rollChest;
+        private System.Windows.Forms.Button addCustomRoll;
+        private System.Windows.Forms.Button modifyCustomRoll;
+        private System.Windows.Forms.Button deleteCustomRoll;
     }
 }
 

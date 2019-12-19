@@ -126,5 +126,17 @@ namespace DnD_Hub
                 MessageBox.Show("Invalid file selection: " + fileName);
             }
         }
+
+        private void openMap(object sender, EventArgs e)
+        {
+            OpenFileDialog openMap = new OpenFileDialog();
+            var path = openMap.ShowDialog();
+            mapBrowser.Navigate(openMap.FileName);
+        }
+
+        private void addSavedRoll(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
