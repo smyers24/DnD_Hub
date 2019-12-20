@@ -16,6 +16,7 @@ namespace DnD_Hub
     {
         DieRegex regexParse = new DieRegex();
         List<string> diceTBlist = new List<string>() { "d4RollNum", "d6RollNum", "d8RollNum", "d10RollNum", "d12RollNum", "d20RollNum" };
+        List<string> validRolls = new List<string>() { "4", "6", "8", "10", "12", "20" };
 
         public Form1()
         {
@@ -136,7 +137,38 @@ namespace DnD_Hub
 
         private void addSavedRoll(object sender, EventArgs e)
         {
-            
+            parseRoll(tb_rollString.Text);
         }
+        private void parseRoll(string rollString)
+        {
+            DieRegex.parseRoll(rollString);
+            string[] rollTokens = rollString.Split('+','-');
+            foreach (string individualRoll in rollTokens)
+            {
+                string[] rollValue = individualRoll.Split('d');
+
+                if (rollValue[0].Contains(" "))
+                    rollValue[0] = rollValue[0].Replace(" ", string.Empty);
+                if (rollValue[1].Contains(" "))
+                    rollValue[1] = rollValue[1].Replace(" ", string.Empty);
+
+                if (!validRolls.Contains(rollValue[1])){
+                    MessageBox.Show(rollValue[1] + " is not a valid die. Please check your roll string", "Roll check", MessageBoxButtons.OK);
+                        return;
+                }
+                else
+                {
+                    roll(Convert.ToInt16(rollValue[0]), Convert.ToInt16(rollValue[1]));
+                }
+
+            }
+        }
+
+        private void manualRoll(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }

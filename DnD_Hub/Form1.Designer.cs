@@ -39,35 +39,35 @@
             this.textBoxD20Extra = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxD10Extra = new System.Windows.Forms.TextBox();
-            this.d4Button = new System.Windows.Forms.Button();
+            this.btn_d4 = new System.Windows.Forms.Button();
             this.textBoxD6Extra = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.textBoxD12Extra = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.d8Button = new System.Windows.Forms.Button();
+            this.btn_d8 = new System.Windows.Forms.Button();
             this.textBoxD8Extra = new System.Windows.Forms.TextBox();
-            this.d6Button = new System.Windows.Forms.Button();
+            this.btn_d6 = new System.Windows.Forms.Button();
             this.textBoxD4Extra = new System.Windows.Forms.TextBox();
-            this.d12Button = new System.Windows.Forms.Button();
+            this.btn_d12 = new System.Windows.Forms.Button();
             this.d20RollNum = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.d10Button = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
+            this.btn_d10 = new System.Windows.Forms.Button();
+            this.btn_rollDiceBox = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.d10RollNum = new System.Windows.Forms.TextBox();
-            this.d20Button = new System.Windows.Forms.Button();
+            this.btn_d20 = new System.Windows.Forms.Button();
             this.d6RollNum = new System.Windows.Forms.TextBox();
             this.d8RollNum = new System.Windows.Forms.TextBox();
             this.d12RollNum = new System.Windows.Forms.TextBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.addCustomRoll = new System.Windows.Forms.Button();
-            this.modifyCustomRoll = new System.Windows.Forms.Button();
-            this.deleteCustomRoll = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.tb_rollString = new System.Windows.Forms.TextBox();
+            this.btn_addCustomRoll = new System.Windows.Forms.Button();
+            this.btn_modifyCustomRoll = new System.Windows.Forms.Button();
+            this.btn_deleteCustomRoll = new System.Windows.Forms.Button();
+            this.btn_ManualRoll = new System.Windows.Forms.Button();
+            this.btn_openCharSheet = new System.Windows.Forms.Button();
             this.characterGroupBox = new System.Windows.Forms.GroupBox();
             this.hpMaxTB = new System.Windows.Forms.TextBox();
             this.acTB = new System.Windows.Forms.TextBox();
@@ -136,11 +136,11 @@
             this.rollGroupBox.Controls.Add(this.diceGroupBox);
             this.rollGroupBox.Controls.Add(this.checkBox1);
             this.rollGroupBox.Controls.Add(this.label10);
-            this.rollGroupBox.Controls.Add(this.textBox1);
-            this.rollGroupBox.Controls.Add(this.addCustomRoll);
-            this.rollGroupBox.Controls.Add(this.modifyCustomRoll);
-            this.rollGroupBox.Controls.Add(this.deleteCustomRoll);
-            this.rollGroupBox.Controls.Add(this.button9);
+            this.rollGroupBox.Controls.Add(this.tb_rollString);
+            this.rollGroupBox.Controls.Add(this.btn_addCustomRoll);
+            this.rollGroupBox.Controls.Add(this.btn_modifyCustomRoll);
+            this.rollGroupBox.Controls.Add(this.btn_deleteCustomRoll);
+            this.rollGroupBox.Controls.Add(this.btn_ManualRoll);
             this.rollGroupBox.Location = new System.Drawing.Point(22, 208);
             this.rollGroupBox.Name = "rollGroupBox";
             this.rollGroupBox.Size = new System.Drawing.Size(555, 264);
@@ -163,30 +163,30 @@
             this.diceGroupBox.Controls.Add(this.textBoxD20Extra);
             this.diceGroupBox.Controls.Add(this.label4);
             this.diceGroupBox.Controls.Add(this.textBoxD10Extra);
-            this.diceGroupBox.Controls.Add(this.d4Button);
+            this.diceGroupBox.Controls.Add(this.btn_d4);
             this.diceGroupBox.Controls.Add(this.textBoxD6Extra);
             this.diceGroupBox.Controls.Add(this.label6);
             this.diceGroupBox.Controls.Add(this.label5);
             this.diceGroupBox.Controls.Add(this.textBoxD12Extra);
             this.diceGroupBox.Controls.Add(this.label8);
-            this.diceGroupBox.Controls.Add(this.d8Button);
+            this.diceGroupBox.Controls.Add(this.btn_d8);
             this.diceGroupBox.Controls.Add(this.textBoxD8Extra);
-            this.diceGroupBox.Controls.Add(this.d6Button);
+            this.diceGroupBox.Controls.Add(this.btn_d6);
             this.diceGroupBox.Controls.Add(this.textBoxD4Extra);
-            this.diceGroupBox.Controls.Add(this.d12Button);
+            this.diceGroupBox.Controls.Add(this.btn_d12);
             this.diceGroupBox.Controls.Add(this.d20RollNum);
             this.diceGroupBox.Controls.Add(this.label7);
-            this.diceGroupBox.Controls.Add(this.d10Button);
-            this.diceGroupBox.Controls.Add(this.button8);
+            this.diceGroupBox.Controls.Add(this.btn_d10);
+            this.diceGroupBox.Controls.Add(this.btn_rollDiceBox);
             this.diceGroupBox.Controls.Add(this.label9);
             this.diceGroupBox.Controls.Add(this.d10RollNum);
-            this.diceGroupBox.Controls.Add(this.d20Button);
+            this.diceGroupBox.Controls.Add(this.btn_d20);
             this.diceGroupBox.Controls.Add(this.d6RollNum);
             this.diceGroupBox.Controls.Add(this.d8RollNum);
             this.diceGroupBox.Controls.Add(this.d12RollNum);
-            this.diceGroupBox.Location = new System.Drawing.Point(324, 12);
+            this.diceGroupBox.Location = new System.Drawing.Point(312, 12);
             this.diceGroupBox.Name = "diceGroupBox";
-            this.diceGroupBox.Size = new System.Drawing.Size(216, 239);
+            this.diceGroupBox.Size = new System.Drawing.Size(228, 239);
             this.diceGroupBox.TabIndex = 7;
             this.diceGroupBox.TabStop = false;
             this.diceGroupBox.Text = "Dice Box";
@@ -195,12 +195,12 @@
             // 
             this.d4RollNum.Location = new System.Drawing.Point(18, 19);
             this.d4RollNum.Name = "d4RollNum";
-            this.d4RollNum.Size = new System.Drawing.Size(37, 20);
+            this.d4RollNum.Size = new System.Drawing.Size(40, 20);
             this.d4RollNum.TabIndex = 5;
             // 
             // textBoxD20Extra
             // 
-            this.textBoxD20Extra.Location = new System.Drawing.Point(123, 162);
+            this.textBoxD20Extra.Location = new System.Drawing.Point(183, 163);
             this.textBoxD20Extra.Name = "textBoxD20Extra";
             this.textBoxD20Extra.Size = new System.Drawing.Size(31, 20);
             this.textBoxD20Extra.TabIndex = 5;
@@ -208,7 +208,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(101, 21);
+            this.label4.Location = new System.Drawing.Point(161, 22);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(21, 13);
             this.label4.TabIndex = 4;
@@ -216,24 +216,24 @@
             // 
             // textBoxD10Extra
             // 
-            this.textBoxD10Extra.Location = new System.Drawing.Point(123, 105);
+            this.textBoxD10Extra.Location = new System.Drawing.Point(183, 106);
             this.textBoxD10Extra.Name = "textBoxD10Extra";
             this.textBoxD10Extra.Size = new System.Drawing.Size(31, 20);
             this.textBoxD10Extra.TabIndex = 5;
             // 
-            // d4Button
+            // btn_d4
             // 
-            this.d4Button.Location = new System.Drawing.Point(61, 16);
-            this.d4Button.Name = "d4Button";
-            this.d4Button.Size = new System.Drawing.Size(34, 23);
-            this.d4Button.TabIndex = 1;
-            this.d4Button.Text = "d4";
-            this.d4Button.UseVisualStyleBackColor = true;
-            this.d4Button.MouseClick += new System.Windows.Forms.MouseEventHandler(this.manualRoll);
+            this.btn_d4.Location = new System.Drawing.Point(80, 16);
+            this.btn_d4.Name = "btn_d4";
+            this.btn_d4.Size = new System.Drawing.Size(75, 23);
+            this.btn_d4.TabIndex = 1;
+            this.btn_d4.Text = "d4";
+            this.btn_d4.UseVisualStyleBackColor = true;
+            this.btn_d4.MouseClick += new System.Windows.Forms.MouseEventHandler(this.manualRoll);
             // 
             // textBoxD6Extra
             // 
-            this.textBoxD6Extra.Location = new System.Drawing.Point(123, 48);
+            this.textBoxD6Extra.Location = new System.Drawing.Point(183, 49);
             this.textBoxD6Extra.Name = "textBoxD6Extra";
             this.textBoxD6Extra.Size = new System.Drawing.Size(31, 20);
             this.textBoxD6Extra.TabIndex = 5;
@@ -241,7 +241,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(101, 78);
+            this.label6.Location = new System.Drawing.Point(161, 79);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(21, 13);
             this.label6.TabIndex = 4;
@@ -250,7 +250,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(101, 50);
+            this.label5.Location = new System.Drawing.Point(161, 51);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(21, 13);
             this.label5.TabIndex = 4;
@@ -258,7 +258,7 @@
             // 
             // textBoxD12Extra
             // 
-            this.textBoxD12Extra.Location = new System.Drawing.Point(123, 133);
+            this.textBoxD12Extra.Location = new System.Drawing.Point(183, 134);
             this.textBoxD12Extra.Name = "textBoxD12Extra";
             this.textBoxD12Extra.Size = new System.Drawing.Size(31, 20);
             this.textBoxD12Extra.TabIndex = 5;
@@ -266,96 +266,96 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(101, 135);
+            this.label8.Location = new System.Drawing.Point(161, 136);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(21, 13);
             this.label8.TabIndex = 4;
             this.label8.Text = "+/-";
             // 
-            // d8Button
+            // btn_d8
             // 
-            this.d8Button.Location = new System.Drawing.Point(61, 73);
-            this.d8Button.Name = "d8Button";
-            this.d8Button.Size = new System.Drawing.Size(34, 23);
-            this.d8Button.TabIndex = 1;
-            this.d8Button.Text = "d8";
-            this.d8Button.UseVisualStyleBackColor = true;
-            this.d8Button.MouseClick += new System.Windows.Forms.MouseEventHandler(this.manualRoll);
+            this.btn_d8.Location = new System.Drawing.Point(80, 73);
+            this.btn_d8.Name = "btn_d8";
+            this.btn_d8.Size = new System.Drawing.Size(75, 23);
+            this.btn_d8.TabIndex = 1;
+            this.btn_d8.Text = "d8";
+            this.btn_d8.UseVisualStyleBackColor = true;
+            this.btn_d8.MouseClick += new System.Windows.Forms.MouseEventHandler(this.manualRoll);
             // 
             // textBoxD8Extra
             // 
-            this.textBoxD8Extra.Location = new System.Drawing.Point(123, 76);
+            this.textBoxD8Extra.Location = new System.Drawing.Point(183, 77);
             this.textBoxD8Extra.Name = "textBoxD8Extra";
             this.textBoxD8Extra.Size = new System.Drawing.Size(31, 20);
             this.textBoxD8Extra.TabIndex = 5;
             // 
-            // d6Button
+            // btn_d6
             // 
-            this.d6Button.Location = new System.Drawing.Point(61, 45);
-            this.d6Button.Name = "d6Button";
-            this.d6Button.Size = new System.Drawing.Size(34, 23);
-            this.d6Button.TabIndex = 1;
-            this.d6Button.Text = "d6";
-            this.d6Button.UseVisualStyleBackColor = true;
-            this.d6Button.MouseClick += new System.Windows.Forms.MouseEventHandler(this.manualRoll);
+            this.btn_d6.Location = new System.Drawing.Point(80, 45);
+            this.btn_d6.Name = "btn_d6";
+            this.btn_d6.Size = new System.Drawing.Size(75, 23);
+            this.btn_d6.TabIndex = 1;
+            this.btn_d6.Text = "d6";
+            this.btn_d6.UseVisualStyleBackColor = true;
+            this.btn_d6.MouseClick += new System.Windows.Forms.MouseEventHandler(this.manualRoll);
             // 
             // textBoxD4Extra
             // 
-            this.textBoxD4Extra.Location = new System.Drawing.Point(123, 19);
+            this.textBoxD4Extra.Location = new System.Drawing.Point(183, 20);
             this.textBoxD4Extra.Name = "textBoxD4Extra";
             this.textBoxD4Extra.Size = new System.Drawing.Size(31, 20);
             this.textBoxD4Extra.TabIndex = 5;
             // 
-            // d12Button
+            // btn_d12
             // 
-            this.d12Button.Location = new System.Drawing.Point(61, 130);
-            this.d12Button.Name = "d12Button";
-            this.d12Button.Size = new System.Drawing.Size(34, 23);
-            this.d12Button.TabIndex = 1;
-            this.d12Button.Text = "d12";
-            this.d12Button.UseVisualStyleBackColor = true;
-            this.d12Button.MouseClick += new System.Windows.Forms.MouseEventHandler(this.manualRoll);
+            this.btn_d12.Location = new System.Drawing.Point(80, 130);
+            this.btn_d12.Name = "btn_d12";
+            this.btn_d12.Size = new System.Drawing.Size(75, 23);
+            this.btn_d12.TabIndex = 1;
+            this.btn_d12.Text = "d12";
+            this.btn_d12.UseVisualStyleBackColor = true;
+            this.btn_d12.MouseClick += new System.Windows.Forms.MouseEventHandler(this.manualRoll);
             // 
             // d20RollNum
             // 
             this.d20RollNum.Location = new System.Drawing.Point(18, 162);
             this.d20RollNum.Name = "d20RollNum";
-            this.d20RollNum.Size = new System.Drawing.Size(37, 20);
+            this.d20RollNum.Size = new System.Drawing.Size(40, 20);
             this.d20RollNum.TabIndex = 5;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(101, 107);
+            this.label7.Location = new System.Drawing.Point(161, 108);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(21, 13);
             this.label7.TabIndex = 4;
             this.label7.Text = "+/-";
             // 
-            // d10Button
+            // btn_d10
             // 
-            this.d10Button.Location = new System.Drawing.Point(61, 102);
-            this.d10Button.Name = "d10Button";
-            this.d10Button.Size = new System.Drawing.Size(34, 23);
-            this.d10Button.TabIndex = 1;
-            this.d10Button.Text = "d10";
-            this.d10Button.UseVisualStyleBackColor = true;
-            this.d10Button.MouseClick += new System.Windows.Forms.MouseEventHandler(this.manualRoll);
+            this.btn_d10.Location = new System.Drawing.Point(80, 102);
+            this.btn_d10.Name = "btn_d10";
+            this.btn_d10.Size = new System.Drawing.Size(75, 23);
+            this.btn_d10.TabIndex = 1;
+            this.btn_d10.Text = "d10";
+            this.btn_d10.UseVisualStyleBackColor = true;
+            this.btn_d10.MouseClick += new System.Windows.Forms.MouseEventHandler(this.manualRoll);
             // 
-            // button8
+            // btn_rollDiceBox
             // 
-            this.button8.Location = new System.Drawing.Point(61, 205);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(75, 23);
-            this.button8.TabIndex = 3;
-            this.button8.Text = "Roll";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.rollConcat);
+            this.btn_rollDiceBox.Location = new System.Drawing.Point(80, 205);
+            this.btn_rollDiceBox.Name = "btn_rollDiceBox";
+            this.btn_rollDiceBox.Size = new System.Drawing.Size(75, 23);
+            this.btn_rollDiceBox.TabIndex = 3;
+            this.btn_rollDiceBox.Text = "Roll";
+            this.btn_rollDiceBox.UseVisualStyleBackColor = true;
+            this.btn_rollDiceBox.Click += new System.EventHandler(this.rollConcat);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(101, 164);
+            this.label9.Location = new System.Drawing.Point(161, 165);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(21, 13);
             this.label9.TabIndex = 4;
@@ -365,38 +365,38 @@
             // 
             this.d10RollNum.Location = new System.Drawing.Point(18, 105);
             this.d10RollNum.Name = "d10RollNum";
-            this.d10RollNum.Size = new System.Drawing.Size(37, 20);
+            this.d10RollNum.Size = new System.Drawing.Size(40, 20);
             this.d10RollNum.TabIndex = 5;
             // 
-            // d20Button
+            // btn_d20
             // 
-            this.d20Button.Location = new System.Drawing.Point(61, 159);
-            this.d20Button.Name = "d20Button";
-            this.d20Button.Size = new System.Drawing.Size(34, 23);
-            this.d20Button.TabIndex = 1;
-            this.d20Button.Text = "d20";
-            this.d20Button.UseVisualStyleBackColor = true;
-            this.d20Button.MouseClick += new System.Windows.Forms.MouseEventHandler(this.manualRoll);
+            this.btn_d20.Location = new System.Drawing.Point(80, 159);
+            this.btn_d20.Name = "btn_d20";
+            this.btn_d20.Size = new System.Drawing.Size(75, 23);
+            this.btn_d20.TabIndex = 1;
+            this.btn_d20.Text = "d20";
+            this.btn_d20.UseVisualStyleBackColor = true;
+            this.btn_d20.MouseClick += new System.Windows.Forms.MouseEventHandler(this.manualRoll);
             // 
             // d6RollNum
             // 
             this.d6RollNum.Location = new System.Drawing.Point(18, 48);
             this.d6RollNum.Name = "d6RollNum";
-            this.d6RollNum.Size = new System.Drawing.Size(37, 20);
+            this.d6RollNum.Size = new System.Drawing.Size(40, 20);
             this.d6RollNum.TabIndex = 5;
             // 
             // d8RollNum
             // 
             this.d8RollNum.Location = new System.Drawing.Point(18, 76);
             this.d8RollNum.Name = "d8RollNum";
-            this.d8RollNum.Size = new System.Drawing.Size(37, 20);
+            this.d8RollNum.Size = new System.Drawing.Size(40, 20);
             this.d8RollNum.TabIndex = 5;
             // 
             // d12RollNum
             // 
             this.d12RollNum.Location = new System.Drawing.Point(18, 133);
             this.d12RollNum.Name = "d12RollNum";
-            this.d12RollNum.Size = new System.Drawing.Size(37, 20);
+            this.d12RollNum.Size = new System.Drawing.Size(40, 20);
             this.d12RollNum.TabIndex = 5;
             // 
             // checkBox1
@@ -418,58 +418,59 @@
             this.label10.TabIndex = 4;
             this.label10.Text = "Roll String";
             // 
-            // textBox1
+            // tb_rollString
             // 
-            this.textBox1.Location = new System.Drawing.Point(10, 182);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(163, 20);
-            this.textBox1.TabIndex = 5;
+            this.tb_rollString.Location = new System.Drawing.Point(10, 182);
+            this.tb_rollString.Name = "tb_rollString";
+            this.tb_rollString.Size = new System.Drawing.Size(163, 20);
+            this.tb_rollString.TabIndex = 5;
             // 
-            // addCustomRoll
+            // btn_addCustomRoll
             // 
-            this.addCustomRoll.Location = new System.Drawing.Point(6, 120);
-            this.addCustomRoll.Name = "addCustomRoll";
-            this.addCustomRoll.Size = new System.Drawing.Size(75, 23);
-            this.addCustomRoll.TabIndex = 3;
-            this.addCustomRoll.Text = "Add";
-            this.addCustomRoll.UseVisualStyleBackColor = true;
-            this.addCustomRoll.Click += new System.EventHandler(this.addSavedRoll);
+            this.btn_addCustomRoll.Location = new System.Drawing.Point(6, 120);
+            this.btn_addCustomRoll.Name = "btn_addCustomRoll";
+            this.btn_addCustomRoll.Size = new System.Drawing.Size(75, 23);
+            this.btn_addCustomRoll.TabIndex = 3;
+            this.btn_addCustomRoll.Text = "Add";
+            this.btn_addCustomRoll.UseVisualStyleBackColor = true;
+            this.btn_addCustomRoll.Click += new System.EventHandler(this.addSavedRoll);
             // 
-            // modifyCustomRoll
+            // btn_modifyCustomRoll
             // 
-            this.modifyCustomRoll.Location = new System.Drawing.Point(98, 120);
-            this.modifyCustomRoll.Name = "modifyCustomRoll";
-            this.modifyCustomRoll.Size = new System.Drawing.Size(75, 23);
-            this.modifyCustomRoll.TabIndex = 3;
-            this.modifyCustomRoll.Text = "Modify";
-            this.modifyCustomRoll.UseVisualStyleBackColor = true;
+            this.btn_modifyCustomRoll.Location = new System.Drawing.Point(98, 120);
+            this.btn_modifyCustomRoll.Name = "btn_modifyCustomRoll";
+            this.btn_modifyCustomRoll.Size = new System.Drawing.Size(75, 23);
+            this.btn_modifyCustomRoll.TabIndex = 3;
+            this.btn_modifyCustomRoll.Text = "Modify";
+            this.btn_modifyCustomRoll.UseVisualStyleBackColor = true;
             // 
-            // deleteCustomRoll
+            // btn_deleteCustomRoll
             // 
-            this.deleteCustomRoll.Location = new System.Drawing.Point(193, 120);
-            this.deleteCustomRoll.Name = "deleteCustomRoll";
-            this.deleteCustomRoll.Size = new System.Drawing.Size(75, 23);
-            this.deleteCustomRoll.TabIndex = 3;
-            this.deleteCustomRoll.Text = "Delete";
-            this.deleteCustomRoll.UseVisualStyleBackColor = true;
+            this.btn_deleteCustomRoll.Location = new System.Drawing.Point(193, 120);
+            this.btn_deleteCustomRoll.Name = "btn_deleteCustomRoll";
+            this.btn_deleteCustomRoll.Size = new System.Drawing.Size(75, 23);
+            this.btn_deleteCustomRoll.TabIndex = 3;
+            this.btn_deleteCustomRoll.Text = "Delete";
+            this.btn_deleteCustomRoll.UseVisualStyleBackColor = true;
             // 
-            // button9
+            // btn_ManualRoll
             // 
-            this.button9.Location = new System.Drawing.Point(10, 217);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(75, 23);
-            this.button9.TabIndex = 3;
-            this.button9.Text = "Manual Roll";
-            this.button9.UseVisualStyleBackColor = true;
+            this.btn_ManualRoll.Location = new System.Drawing.Point(10, 217);
+            this.btn_ManualRoll.Name = "btn_ManualRoll";
+            this.btn_ManualRoll.Size = new System.Drawing.Size(75, 23);
+            this.btn_ManualRoll.TabIndex = 3;
+            this.btn_ManualRoll.Text = "Manual Roll";
+            this.btn_ManualRoll.UseVisualStyleBackColor = true;
+            this.btn_ManualRoll.Click += new System.EventHandler(this.manualRoll);
             // 
-            // button5
+            // btn_openCharSheet
             // 
-            this.button5.Location = new System.Drawing.Point(14, 134);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(145, 23);
-            this.button5.TabIndex = 3;
-            this.button5.Text = "Open Character Sheet";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btn_openCharSheet.Location = new System.Drawing.Point(14, 134);
+            this.btn_openCharSheet.Name = "btn_openCharSheet";
+            this.btn_openCharSheet.Size = new System.Drawing.Size(145, 23);
+            this.btn_openCharSheet.TabIndex = 3;
+            this.btn_openCharSheet.Text = "Open Character Sheet";
+            this.btn_openCharSheet.UseVisualStyleBackColor = true;
             // 
             // characterGroupBox
             // 
@@ -481,7 +482,7 @@
             this.characterGroupBox.Controls.Add(this.charNameTB);
             this.characterGroupBox.Controls.Add(this.label2);
             this.characterGroupBox.Controls.Add(this.label1);
-            this.characterGroupBox.Controls.Add(this.button5);
+            this.characterGroupBox.Controls.Add(this.btn_openCharSheet);
             this.characterGroupBox.Location = new System.Drawing.Point(22, 21);
             this.characterGroupBox.Name = "characterGroupBox";
             this.characterGroupBox.Size = new System.Drawing.Size(318, 181);
@@ -671,7 +672,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.GroupBox rollGroupBox;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btn_openCharSheet;
         private System.Windows.Forms.GroupBox characterGroupBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
@@ -690,17 +691,17 @@
         private System.Windows.Forms.TextBox d12RollNum;
         private System.Windows.Forms.TextBox d8RollNum;
         private System.Windows.Forms.TextBox d4RollNum;
-        private System.Windows.Forms.Button d20Button;
+        private System.Windows.Forms.Button btn_d20;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button d10Button;
+        private System.Windows.Forms.Button btn_d10;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button d12Button;
-        private System.Windows.Forms.Button d6Button;
-        private System.Windows.Forms.Button d8Button;
+        private System.Windows.Forms.Button btn_d12;
+        private System.Windows.Forms.Button btn_d6;
+        private System.Windows.Forms.Button btn_d8;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button d4Button;
+        private System.Windows.Forms.Button btn_d4;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox hpMaxTB;
         private System.Windows.Forms.TextBox acTB;
@@ -710,9 +711,9 @@
         private System.Windows.Forms.TextBox charNameTB;
         private System.Windows.Forms.ListBox openedItemsListBox;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.TextBox tb_rollString;
+        private System.Windows.Forms.Button btn_ManualRoll;
+        private System.Windows.Forms.Button btn_rollDiceBox;
         private System.Windows.Forms.GroupBox diceGroupBox;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
@@ -720,9 +721,9 @@
         private System.Windows.Forms.WebBrowser mapBrowser;
         private System.Windows.Forms.Button mapSelection;
         private System.Windows.Forms.ListBox rollChest;
-        private System.Windows.Forms.Button addCustomRoll;
-        private System.Windows.Forms.Button modifyCustomRoll;
-        private System.Windows.Forms.Button deleteCustomRoll;
+        private System.Windows.Forms.Button btn_addCustomRoll;
+        private System.Windows.Forms.Button btn_modifyCustomRoll;
+        private System.Windows.Forms.Button btn_deleteCustomRoll;
     }
 }
 
