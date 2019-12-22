@@ -8,3 +8,13 @@ Q:\Coding\GitHub\DnD_Hub\DnD_Hub\bin\Debug\DnD_Hub.pdb
 Q:\Coding\GitHub\DnD_Hub\DnD_Hub\obj\Debug\DnD_Hub.exe
 Q:\Coding\GitHub\DnD_Hub\DnD_Hub\obj\Debug\DnD_Hub.pdb
 Q:\Coding\GitHub\DnD_Hub\DnD_Hub\obj\Debug\DnD_Hub.csprojAssemblyReference.cache
+C:\SVN\Py\oops\git\DnD_Hub\DnD_Hub\bin\Debug\DnD_Hub.exe.config
+C:\SVN\Py\oops\git\DnD_Hub\DnD_Hub\bin\Debug\DnD_Hub.exe
+C:\SVN\Py\oops\git\DnD_Hub\DnD_Hub\bin\Debug\DnD_Hub.pdb
+C:\SVN\Py\oops\git\DnD_Hub\DnD_Hub\obj\Debug\DnD_Hub.csprojAssemblyReference.cache
+C:\SVN\Py\oops\git\DnD_Hub\DnD_Hub\obj\Debug\DnD_Hub.Form1.resources
+C:\SVN\Py\oops\git\DnD_Hub\DnD_Hub\obj\Debug\DnD_Hub.Properties.Resources.resources
+C:\SVN\Py\oops\git\DnD_Hub\DnD_Hub\obj\Debug\DnD_Hub.csproj.GenerateResource.cache
+C:\SVN\Py\oops\git\DnD_Hub\DnD_Hub\obj\Debug\DnD_Hub.csproj.CoreCompileInputs.cache
+C:\SVN\Py\oops\git\DnD_Hub\DnD_Hub\obj\Debug\DnD_Hub.exe
+C:\SVN\Py\oops\git\DnD_Hub\DnD_Hub\obj\Debug\DnD_Hub.pdb

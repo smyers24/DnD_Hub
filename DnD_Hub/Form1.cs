@@ -17,6 +17,7 @@ namespace DnD_Hub
         DieRegex regexParse = new DieRegex();
         List<string> diceTBlist = new List<string>() { "d4RollNum", "d6RollNum", "d8RollNum", "d10RollNum", "d12RollNum", "d20RollNum" };
         List<string> validRolls = new List<string>() { "4", "6", "8", "10", "12", "20" };
+        Random rollSeed = new Random();
 
         public Form1()
         {
@@ -25,46 +26,52 @@ namespace DnD_Hub
 
         private int roll(int numberOfRolls, int dieValue)
         {
-            Random roll = new Random();
+
             int result = 0;
             for (int i = 0; i < numberOfRolls; i++)
             {
-                result += roll.Next(1, dieValue + 1);
+                result += rollSeed.Next(1, dieValue + 1);
             }
             Console.WriteLine(result);
             return result;
 
         }
 
-
-        private void manualRoll(object sender, MouseEventArgs e)
-        {
-            rollCalc(sender);
-
-        }
-
-        private int rollCalc(object sender)
+        private void manualRoll(object sender, EventArgs e)
         {
             Button dieButton = sender as Button;
-            bool validRollQty;
-            int rollQty;
-            int dieValue = int.Parse(dieButton.Text.Substring(1)); //get die value from button name
-            string rollQtyName = dieButton.Text + "RollNum"; //make name of corresponding textbox
-            TextBox tb = new TextBox();
-            tb.Name = rollQtyName;
-            int rollQuantity;
+            int dieValue = DieRegex.findDieValue(dieButton.Name); //get die value from button name
+            string panelName = "panel_d" + dieValue;
+            string labelName = "label_d" + dieValue + "Result";
 
-            TextBox tbx = this.Controls.Find(rollQtyName, true).FirstOrDefault() as TextBox;
-            validRollQty = int.TryParse(tbx.Text, out rollQty);
+            var panel = this.Controls.Find(panelName, true).First();
+            var label = this.Controls.Find(labelName, true).First();
+            panel_d4.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Qty")).First();
+            TextBox tb_Qty = panel.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Qty")).First();
+            TextBox tb_Mod = panel.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Mod")).First();
+            int result = rollCalc(tb_Qty.Text, dieValue, tb_Mod.Text);
+            label.Text = result.ToString();
+        }
+
+        private int rollCalc(string qty, int dieValue, string mod)
+        {
+            int rollQuantity, rollQty, modValue;
+            bool validRollQty = int.TryParse(qty, out rollQty);
+
             if (validRollQty)
                 rollQuantity = rollQty;
             else
                 rollQuantity = 1;
             int result = roll(rollQuantity, dieValue);
-
+            if (!string.IsNullOrEmpty(qty))
+            {
+                int.TryParse(mod, out modValue);
+                result += modValue;
+            }       
             return result;
         }
 
+        /*
         private void rollConcat(object sender, EventArgs e)
         {
             TextBox diceBox = new TextBox();
@@ -85,7 +92,7 @@ namespace DnD_Hub
             }
 
         }
-
+        */
         private void openListOfThings(object sender, EventArgs e)
         {
             openedItemsListBox.Items.Clear();
@@ -109,6 +116,7 @@ namespace DnD_Hub
             if (openedItemsListBox.SelectedItem != null)
             {
                 Console.WriteLine(openedItemsListBox.SelectedItem.ToString());
+                OpenFileWithDefault(openedItemsListBox.SelectedItem.ToString());
             }
             openedItemsListBox.ClearSelected();
         }
@@ -164,11 +172,27 @@ namespace DnD_Hub
             }
         }
 
-        private void manualRoll(object sender, EventArgs e)
+        private void openFileBrowser(object sender, EventArgs e)
         {
-
+            OpenFileDialog openMap = new OpenFileDialog();
+            var path = openMap.ShowDialog();
+            OpenFileWithDefault(openMap.FileName);
         }
 
+        private void saveSettings(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.ss_charName   = tb_charName.Text;
+            Properties.Settings.Default.ss_charHPcurr = tb_charHPcurr.Text;
+            Properties.Settings.Default.ss_charHPmax  = tb_charHPmax.Text;
+            Properties.Settings.Default.ss_charAC     = tb_charAC.Text;
+        }
 
+        private void loadSettings(object sender, EventArgs e)
+        {
+            tb_charName.Text   = Properties.Settings.Default.ss_charName;
+            tb_charHPcurr.Text = Properties.Settings.Default.ss_charHPcurr;
+            tb_charHPmax.Text  = Properties.Settings.Default.ss_charHPmax;
+            tb_charAC.Text     = Properties.Settings.Default.ss_charAC;
+        }
     }
 }

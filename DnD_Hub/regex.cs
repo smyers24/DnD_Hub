@@ -53,5 +53,10 @@ namespace DnD_Hub
             MatchCollection matches = rx.Matches(roll);
             Console.WriteLine(matches.ToString());
         }
+
+        public static int findDieValue (string controlName)
+        {
+            return int.Parse(Regex.Match(controlName, @"\d+").Value);
+        }
     }
 }
