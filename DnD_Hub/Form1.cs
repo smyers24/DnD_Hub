@@ -18,23 +18,12 @@ namespace DnD_Hub
         List<string> diceTBlist = new List<string>() { "d4RollNum", "d6RollNum", "d8RollNum", "d10RollNum", "d12RollNum", "d20RollNum" };
         List<string> validRolls = new List<string>() { "4", "6", "8", "10", "12", "20" };
         Random rollSeed = new Random();
+        RollFunctions roll = new RollFunctions();
+        FileIO file = new FileIO();
 
         public Form1()
         {
             InitializeComponent();
-        }
-
-        private int roll(int numberOfRolls, int dieValue)
-        {
-
-            int result = 0;
-            for (int i = 0; i < numberOfRolls; i++)
-            {
-                result += rollSeed.Next(1, dieValue + 1);
-            }
-            Console.WriteLine(result);
-            return result;
-
         }
 
         private void manualRoll(object sender, EventArgs e)
@@ -49,31 +38,31 @@ namespace DnD_Hub
             panel_d4.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Qty")).First();
             TextBox tb_Qty = panel.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Qty")).First();
             TextBox tb_Mod = panel.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Mod")).First();
-            int result = rollCalc(tb_Qty.Text, dieValue, tb_Mod.Text);
+            int result = roll.rollCalc(tb_Qty.Text, dieValue, tb_Mod.Text);
             label.Text = result.ToString();
         }
-
-        private int rollCalc(string qty, int dieValue, string mod)
-        {
-            int rollQuantity, rollQty, modValue;
-            bool validRollQty = int.TryParse(qty, out rollQty);
-
-            if (validRollQty)
-                rollQuantity = rollQty;
-            else
-                rollQuantity = 1;
-            int result = roll(rollQuantity, dieValue);
-            if (!string.IsNullOrEmpty(qty))
-            {
-                int.TryParse(mod, out modValue);
-                result += modValue;
-            }       
-            return result;
-        }
-
-        /*
+        
         private void rollConcat(object sender, EventArgs e)
         {
+            /*
+            diceGroupBox.Controls.OfType
+            foreach (Panel panel in diceGroupBox)
+            {
+                Button dieButton = sender as Button;
+                int dieValue = DieRegex.findDieValue(dieButton.Name); //get die value from button name
+                string panelName = "panel_d" + dieValue;
+                string labelName = "label_d" + dieValue + "Result";
+
+                var panel = this.Controls.Find(panelName, true).First();
+                var label = this.Controls.Find(labelName, true).First();
+                panel_d4.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Qty")).First();
+                TextBox tb_Qty = panel.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Qty")).First();
+                TextBox tb_Mod = panel.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Mod")).First();
+                int result = rollCalc(tb_Qty.Text, dieValue, tb_Mod.Text);
+                label.Text = result.ToString();
+            }
+
+
             TextBox diceBox = new TextBox();
             int rollQty;
             int total = 0;
@@ -90,24 +79,17 @@ namespace DnD_Hub
                 }
                 //  if di
             }
+            */
 
         }
-        */
+        
         private void openListOfThings(object sender, EventArgs e)
         {
             openedItemsListBox.Items.Clear();
-            string[] files = Array.Empty<string>();
-            OpenFileDialog fileDialog = new OpenFileDialog();
-          //  var fullFilePath = fileDialog.FileName;
-            if (fileDialog.ShowDialog() == DialogResult.OK)
-            {
-                files = File.ReadAllLines(fileDialog.FileName);
-            }
+            string[] files = file.openListOfThings();
             foreach (string file in files)
             {
                 openedItemsListBox.Items.Add(file);
-                OpenFileWithDefault(file);
-                Console.WriteLine(file);
             }
         }
 
@@ -116,24 +98,9 @@ namespace DnD_Hub
             if (openedItemsListBox.SelectedItem != null)
             {
                 Console.WriteLine(openedItemsListBox.SelectedItem.ToString());
-                OpenFileWithDefault(openedItemsListBox.SelectedItem.ToString());
+                file.OpenFileWithDefault(openedItemsListBox.SelectedItem.ToString());
             }
             openedItemsListBox.ClearSelected();
-        }
-
-        private void OpenFileWithDefault(string fileName)
-        {
-            Process fileopener = new Process();
-            try
-            {
-                fileopener.StartInfo.FileName = fileName;
-                fileopener.Start();
-                fileopener.Close();
-            }
-            catch
-            {
-                MessageBox.Show("Invalid file selection: " + fileName);
-            }
         }
 
         private void openMap(object sender, EventArgs e)
@@ -143,7 +110,7 @@ namespace DnD_Hub
             mapBrowser.Navigate(openMap.FileName);
         }
 
-        private void addSavedRoll(object sender, EventArgs e)
+        private void manualRollString(object sender, EventArgs e)
         {
             parseRoll(tb_rollString.Text);
         }
@@ -166,7 +133,7 @@ namespace DnD_Hub
                 }
                 else
                 {
-                    roll(Convert.ToInt16(rollValue[0]), Convert.ToInt16(rollValue[1]));
+                    roll.roll(Convert.ToInt16(rollValue[0]), Convert.ToInt16(rollValue[1]));
                 }
 
             }
@@ -176,7 +143,7 @@ namespace DnD_Hub
         {
             OpenFileDialog openMap = new OpenFileDialog();
             var path = openMap.ShowDialog();
-            OpenFileWithDefault(openMap.FileName);
+            file.OpenFileWithDefault(openMap.FileName);
         }
 
         private void saveSettings(object sender, FormClosingEventArgs e)
@@ -193,6 +160,17 @@ namespace DnD_Hub
             tb_charHPcurr.Text = Properties.Settings.Default.ss_charHPcurr;
             tb_charHPmax.Text  = Properties.Settings.Default.ss_charHPmax;
             tb_charAC.Text     = Properties.Settings.Default.ss_charAC;
+        }
+
+        private void openChSheet(object sender, EventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            file.OpenFileWithDefault(fileDialog.FileName);
+        }
+
+        private void addCustomRoll(object sender, EventArgs e)
+        {
+
         }
     }
 }
