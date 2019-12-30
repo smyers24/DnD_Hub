@@ -26,10 +26,16 @@ namespace DnD_Hub
             InitializeComponent();
         }
 
-        private void manualRoll(object sender, EventArgs e)
+        private void clickManualRoll(object sender, EventArgs e)
         {
             Button dieButton = sender as Button;
             int dieValue = DieRegex.findDieValue(dieButton.Name); //get die value from button name
+            manualRoll(dieValue);
+        }
+
+
+        private void manualRoll(int dieValue)
+        {
             string panelName = "panel_d" + dieValue;
             string labelName = "label_d" + dieValue + "Result";
 
@@ -44,42 +50,27 @@ namespace DnD_Hub
         
         private void rollConcat(object sender, EventArgs e)
         {
-            /*
-            diceGroupBox.Controls.OfType
-            foreach (Panel panel in diceGroupBox)
+            
+            var panels = diceGroupBox.Controls.OfType<Panel>();
+            foreach (Panel panel in panels)
             {
+
                 Button dieButton = sender as Button;
-                int dieValue = DieRegex.findDieValue(dieButton.Name); //get die value from button name
+                string[] panelSplit = panel.Name.Split('d');
+                int dieValue = int.Parse(panelSplit[1]);
                 string panelName = "panel_d" + dieValue;
                 string labelName = "label_d" + dieValue + "Result";
 
-                var panel = this.Controls.Find(panelName, true).First();
                 var label = this.Controls.Find(labelName, true).First();
                 panel_d4.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Qty")).First();
                 TextBox tb_Qty = panel.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Qty")).First();
                 TextBox tb_Mod = panel.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Mod")).First();
-                int result = rollCalc(tb_Qty.Text, dieValue, tb_Mod.Text);
-                label.Text = result.ToString();
-            }
-
-
-            TextBox diceBox = new TextBox();
-            int rollQty;
-            int total = 0;
-            foreach (String box in diceTBlist)
-            {
-
-                TextBox tbx = this.Controls.Find(box, true).FirstOrDefault() as TextBox;
-                if (tbx.Text != "")
+                if (!string.IsNullOrEmpty(tb_Qty.Text))
                 {
-                    total += rollCalc(tbx);
-                    Console.WriteLine(total);
-                    bool validRollQty = int.TryParse(tbx.Text, out rollQty);
-                    diceBox.Name = box;
+                    int result = roll.rollCalc(tb_Qty.Text, dieValue, tb_Mod.Text);
+                    label.Text = result.ToString();
                 }
-                //  if di
             }
-            */
 
         }
         

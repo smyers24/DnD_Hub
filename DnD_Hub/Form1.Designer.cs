@@ -101,8 +101,6 @@
             this.openListBtn = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tab_overview = new System.Windows.Forms.TabPage();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
             this.tab_map = new System.Windows.Forms.TabPage();
             this.mapBrowser = new System.Windows.Forms.WebBrowser();
             this.rollGroupBox.SuspendLayout();
@@ -128,6 +126,7 @@
             this.rollGroupBox.Controls.Add(this.checkBox1);
             this.rollGroupBox.Controls.Add(this.label10);
             this.rollGroupBox.Controls.Add(this.tb_rollString);
+            this.rollGroupBox.Controls.Add(this.panel1);
             this.rollGroupBox.Controls.Add(this.btn_addCustomRoll);
             this.rollGroupBox.Controls.Add(this.btn_modifyCustomRoll);
             this.rollGroupBox.Controls.Add(this.label_manualRollResult);
@@ -156,7 +155,6 @@
             this.diceGroupBox.Controls.Add(this.panel_d6);
             this.diceGroupBox.Controls.Add(this.panel_d12);
             this.diceGroupBox.Controls.Add(this.panel_d4);
-            this.diceGroupBox.Controls.Add(this.panel1);
             this.diceGroupBox.Controls.Add(this.panel_d8);
             this.diceGroupBox.Controls.Add(this.btn_rollDiceBox);
             this.diceGroupBox.Location = new System.Drawing.Point(312, 12);
@@ -194,7 +192,7 @@
             this.btn_d20.TabIndex = 1;
             this.btn_d20.Text = "d20";
             this.btn_d20.UseVisualStyleBackColor = true;
-            this.btn_d20.Click += new System.EventHandler(this.manualRoll);
+            this.btn_d20.Click += new System.EventHandler(this.clickManualRoll);
             // 
             // label9
             // 
@@ -259,7 +257,7 @@
             this.btn_d10.TabIndex = 1;
             this.btn_d10.Text = "d10";
             this.btn_d10.UseVisualStyleBackColor = true;
-            this.btn_d10.Click += new System.EventHandler(this.manualRoll);
+            this.btn_d10.Click += new System.EventHandler(this.clickManualRoll);
             // 
             // label7
             // 
@@ -317,7 +315,7 @@
             this.btn_d6.TabIndex = 1;
             this.btn_d6.Text = "d6";
             this.btn_d6.UseVisualStyleBackColor = true;
-            this.btn_d6.Click += new System.EventHandler(this.manualRoll);
+            this.btn_d6.Click += new System.EventHandler(this.clickManualRoll);
             // 
             // tb_d6Qty
             // 
@@ -389,7 +387,7 @@
             this.btn_d12.TabIndex = 1;
             this.btn_d12.Text = "d12";
             this.btn_d12.UseVisualStyleBackColor = true;
-            this.btn_d12.Click += new System.EventHandler(this.manualRoll);
+            this.btn_d12.Click += new System.EventHandler(this.clickManualRoll);
             // 
             // label8
             // 
@@ -461,7 +459,7 @@
             this.btn_d4.TabIndex = 1;
             this.btn_d4.Text = "d4";
             this.btn_d4.UseVisualStyleBackColor = true;
-            this.btn_d4.Click += new System.EventHandler(this.manualRoll);
+            this.btn_d4.Click += new System.EventHandler(this.clickManualRoll);
             // 
             // label4
             // 
@@ -495,7 +493,7 @@
             // 
             this.panel1.Controls.Add(this.radioButton2);
             this.panel1.Controls.Add(this.radioButton1);
-            this.panel1.Location = new System.Drawing.Point(198, 212);
+            this.panel1.Location = new System.Drawing.Point(98, 236);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(200, 100);
             this.panel1.TabIndex = 8;
@@ -557,7 +555,7 @@
             this.btn_d8.TabIndex = 1;
             this.btn_d8.Text = "d8";
             this.btn_d8.UseVisualStyleBackColor = true;
-            this.btn_d8.Click += new System.EventHandler(this.manualRoll);
+            this.btn_d8.Click += new System.EventHandler(this.clickManualRoll);
             // 
             // label6
             // 
@@ -815,8 +813,6 @@
             // 
             // tab_overview
             // 
-            this.tab_overview.Controls.Add(this.panel7);
-            this.tab_overview.Controls.Add(this.panel5);
             this.tab_overview.Controls.Add(this.characterGroupBox);
             this.tab_overview.Controls.Add(this.fileGroupBox);
             this.tab_overview.Controls.Add(this.rollGroupBox);
@@ -827,20 +823,6 @@
             this.tab_overview.TabIndex = 0;
             this.tab_overview.Text = "Overview";
             this.tab_overview.UseVisualStyleBackColor = true;
-            // 
-            // panel7
-            // 
-            this.panel7.Location = new System.Drawing.Point(676, 16);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(343, 27);
-            this.panel7.TabIndex = 7;
-            // 
-            // panel5
-            // 
-            this.panel5.Location = new System.Drawing.Point(676, 49);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(343, 27);
-            this.panel5.TabIndex = 7;
             // 
             // tab_map
             // 
@@ -976,8 +958,6 @@
         private System.Windows.Forms.Panel panel_d6;
         private System.Windows.Forms.Panel panel_d12;
         private System.Windows.Forms.Panel panel_d8;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Panel panel5;
     }
 }
 
