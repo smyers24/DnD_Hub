@@ -12,25 +12,36 @@ namespace CustomAttackInput
 {
     public partial class CustomAttack : Form
     {
-        string name = "";
-        string roll = "";
-        string level = "";
-        string description = "";
+        public string name = "";
+        public string roll = "";
+        public string level = "";
+        public string description = "";
 
         public CustomAttack()
         {
             InitializeComponent();
         }
 
-        private void saveAtk(object sender, EventArgs e)
+        public void saveAtk(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(tb_Name.Text))
+            {
+                MessageBox.Show("Please enter a name for this attack", "Form check", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if (string.IsNullOrEmpty(tb_RollString.Text))
+            {
+                MessageBox.Show("Please enter a roll for this attack", "Form check", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
             this.name = tb_Name.Text;
             this.roll = tb_RollString.Text;
             this.level = tb_Level.Text;
             this.description = tb_Description.Text;
+            this.Close();
         }
 
-        private void btn_Cancel_Click(object sender, EventArgs e)
+        public void btn_Cancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }

@@ -182,6 +182,12 @@ namespace DnD_Hub
         {
             CustomAttack newAtk = new CustomAttack();
             newAtk.Show();
+            lv_customRolls.Items.Add(newAtk.name, "cust_Name");
+            lv_customRolls.Items.Add(newAtk.roll, "cust_Roll");
+            lv_customRolls.Items.Add(newAtk.level, "cust_Level");
+            lv_customRolls.Items.Add(newAtk.description, "cus_Desc");
+            lv_customRolls.Refresh();
         }
+
     }
 }

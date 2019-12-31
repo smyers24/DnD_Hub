@@ -54,12 +54,6 @@
     <Compile Include="CustomAtkForm\CustomAttack.Designer.cs" />
     <Compile Include="CustomAtkForm\Program.cs" />
     <Compile Include="FileIO.cs" />
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="regex.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
