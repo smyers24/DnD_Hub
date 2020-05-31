@@ -2,12 +2,13 @@
 using System.IO;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Text;
 
-namespace DnD_Hub
+namespace IO
 {
-    class FileIO
+    static class FileIO
     {
-        public string[] openListOfThings()
+        public static string[] openListOfThings()
         {
             string[] files = Array.Empty<string>();
             OpenFileDialog fileDialog = new OpenFileDialog();
@@ -22,7 +23,7 @@ namespace DnD_Hub
             return files;
         }
 
-        public void OpenFileWithDefault(string fileName)
+        public static void OpenFileWithDefault(string fileName)
         {
             Process fileopener = new Process();
             try
@@ -37,6 +38,16 @@ namespace DnD_Hub
             }
         }
 
+        public static void WriteDataToCSV(string[][] data)
+        {
+            var csvData = new StringBuilder();
+        }
+
+        public static string[] LoadCSV(string fileName)
+        {
+            var data = File.ReadAllLines(fileName);
+            return data;
+        }
 
     }
 }

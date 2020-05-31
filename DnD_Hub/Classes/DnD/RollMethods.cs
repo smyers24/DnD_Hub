@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DnD_Hub
+namespace DnD.Rolls
 {
     class RollFunctions
     {
@@ -39,7 +39,6 @@ namespace DnD_Hub
 
         public int roll(int numberOfRolls, int dieValue)
         {
-
             int result = 0;
             for (int i = 0; i < numberOfRolls; i++)
             {
@@ -47,7 +46,6 @@ namespace DnD_Hub
             }
             Console.WriteLine(result);
             return result;
-
         }
     }
 }

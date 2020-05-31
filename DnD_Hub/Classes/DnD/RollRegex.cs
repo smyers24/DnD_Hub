@@ -5,21 +5,32 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 
-namespace DnD_Hub
+namespace DnD
 {
-    public class DieRegex
+    public static class DieRegex
     {
-
-        public static void main(String args)
-
+        public static void parseRoll (String roll)
         {
 
-          //  int amount, die, mult = 1, add = 0;
-//
-          //  Regex rx = new Regex("([1-9]\\d*)?d([1-9]\\d*)([/x][1-9]\\d*)?([+-]\\d+)?");
-           // Match RegexMatch = Regex.Match(roll, "([1-9]\\d*)?d([1-9]\\d*)([/x][1-9]\\d*)?([+-]\\d+)?");
-         ///  // MatchCollection matches = rx.Matches(roll);
-        //    Console.WriteLine(matches);
+            Regex rx = new Regex("([1-9]\\d*)?d([1-9]\\d*)([/x][1-9]\\d*)?([+-]\\d+)?");
+            Match RegexMatch = Regex.Match(roll, "([1-9]\\d*)?d([1-9]\\d*)([/x][1-9]\\d*)?([+-]\\d+)?");
+            MatchCollection matches = rx.Matches(roll);
+            Console.WriteLine(matches.ToString());
+        }
+
+        public static int findDieValue (string controlName)
+        {
+            return int.Parse(Regex.Match(controlName, @"\d+").Value);
+        }
+
+        public static void main(String args)
+        {
+            //  int amount, die, mult = 1, add = 0;
+            //
+            //  Regex rx = new Regex("([1-9]\\d*)?d([1-9]\\d*)([/x][1-9]\\d*)?([+-]\\d+)?");
+            // Match RegexMatch = Regex.Match(roll, "([1-9]\\d*)?d([1-9]\\d*)([/x][1-9]\\d*)?([+-]\\d+)?");
+            ///  // MatchCollection matches = rx.Matches(roll);
+            //    Console.WriteLine(matches);
             /*
             matches m = p.matcher("d20");
             if (m.matches())
@@ -45,18 +56,6 @@ namespace DnD_Hub
         */
         }
 
-        public static void parseRoll (String roll)
-        {
 
-            Regex rx = new Regex("([1-9]\\d*)?d([1-9]\\d*)([/x][1-9]\\d*)?([+-]\\d+)?");
-            Match RegexMatch = Regex.Match(roll, "([1-9]\\d*)?d([1-9]\\d*)([/x][1-9]\\d*)?([+-]\\d+)?");
-            MatchCollection matches = rx.Matches(roll);
-            Console.WriteLine(matches.ToString());
-        }
-
-        public static int findDieValue (string controlName)
-        {
-            return int.Parse(Regex.Match(controlName, @"\d+").Value);
-        }
     }
 }

@@ -9,22 +9,26 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
-using CustomAttackInput;
+using DnD.Rolls;
+using IO;
+using DnD.Objects;
 
-namespace DnD_Hub
+namespace DnD
 {
     public partial class Main : Form
     {
-        DieRegex regexParse = new DieRegex();
         List<string> diceTBlist = new List<string>() { "d4RollNum", "d6RollNum", "d8RollNum", "d10RollNum", "d12RollNum", "d20RollNum" };
         List<string> validRolls = new List<string>() { "4", "6", "8", "10", "12", "20" };
         Random rollSeed = new Random();
         RollFunctions roll = new RollFunctions();
-        FileIO file = new FileIO();
+        EventHandler CustomRollEvent;
+        DataTable RollTable;
 
         public Main()
         {
             InitializeComponent();
+            DataTable RollTable = new DataTable("Roll Table");
+            DGV_Rolls.DataSource = RollTable;
         }
 
         private void clickManualRoll(object sender, EventArgs e)
@@ -48,7 +52,7 @@ namespace DnD_Hub
             int result = roll.rollCalc(tb_Qty.Text, dieValue, tb_Mod.Text);
             label.Text = result.ToString();
         }
-        
+
         private void rollConcat(object sender, EventArgs e)
         {
             int total = 0;
@@ -76,11 +80,11 @@ namespace DnD_Hub
             }
 
         }
-        
+
         private void openListOfThings(object sender, EventArgs e)
         {
             openedItemsListBox.Items.Clear();
-            string[] files = file.openListOfThings();
+            string[] files = FileIO.openListOfThings();
             foreach (string file in files)
             {
                 openedItemsListBox.Items.Add(file);
@@ -92,7 +96,7 @@ namespace DnD_Hub
             if (openedItemsListBox.SelectedItem != null)
             {
                 Console.WriteLine(openedItemsListBox.SelectedItem.ToString());
-                file.OpenFileWithDefault(openedItemsListBox.SelectedItem.ToString());
+                FileIO.OpenFileWithDefault(openedItemsListBox.SelectedItem.ToString());
             }
             openedItemsListBox.ClearSelected();
         }
@@ -115,7 +119,7 @@ namespace DnD_Hub
             int total = 0;
             string processingType = "";
             DieRegex.parseRoll(rollString);
-            string[] rollTokens = rollString.Split('+','-');
+            string[] rollTokens = rollString.Split('+', '-');
             foreach (string individualRoll in rollTokens)
             {
                 string[] rollValue = individualRoll.Split('d');
@@ -153,41 +157,102 @@ namespace DnD_Hub
         {
             OpenFileDialog openMap = new OpenFileDialog();
             var path = openMap.ShowDialog();
-            file.OpenFileWithDefault(openMap.FileName);
+            FileIO.OpenFileWithDefault(openMap.FileName);
         }
 
         private void saveSettings(object sender, FormClosingEventArgs e)
         {
-            Properties.Settings.Default.ss_charName   = tb_charName.Text;
+            Properties.Settings.Default.ss_charName = tb_charName.Text;
             Properties.Settings.Default.ss_charHPcurr = tb_charHPcurr.Text;
-            Properties.Settings.Default.ss_charHPmax  = tb_charHPmax.Text;
-            Properties.Settings.Default.ss_charAC     = tb_charAC.Text;
+            Properties.Settings.Default.ss_charHPmax = tb_charHPmax.Text;
+            Properties.Settings.Default.ss_charAC = tb_charAC.Text;
         }
 
         private void loadSettings(object sender, EventArgs e)
         {
-            tb_charName.Text   = Properties.Settings.Default.ss_charName;
+            tb_charName.Text = Properties.Settings.Default.ss_charName;
             tb_charHPcurr.Text = Properties.Settings.Default.ss_charHPcurr;
-            tb_charHPmax.Text  = Properties.Settings.Default.ss_charHPmax;
-            tb_charAC.Text     = Properties.Settings.Default.ss_charAC;
+            tb_charHPmax.Text = Properties.Settings.Default.ss_charHPmax;
+            tb_charAC.Text = Properties.Settings.Default.ss_charAC;
+
+            RollTable = LoadTable();
+            DGV_Rolls.DataSource = RollTable;
         }
 
         private void openChSheet(object sender, EventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
-            file.OpenFileWithDefault(fileDialog.FileName);
+            FileIO.OpenFileWithDefault(fileDialog.FileName);
         }
 
         private void addCustomRoll(object sender, EventArgs e)
         {
-            CustomAttack newAtk = new CustomAttack();
-            newAtk.Show();
-            lv_customRolls.Items.Add(newAtk.name, "cust_Name");
-            lv_customRolls.Items.Add(newAtk.roll, "cust_Roll");
-            lv_customRolls.Items.Add(newAtk.level, "cust_Level");
-            lv_customRolls.Items.Add(newAtk.description, "cus_Desc");
-            lv_customRolls.Refresh();
+            var roll = new CustomRoll();
+            var rollForm = new CustomRollForm();
+            rollForm.Show();
+       //     CustomRollEvent += rollForm.FormClosed;
+            rollForm.Dispose();
         }
 
+        private void btn_modifyCustomRoll_Click(object sender, EventArgs e)
+        {
+            //   Solution sa = new Solution();
+            //   int[][] fuck = new int[1][];
+            //   fuck[0] = new int[2] { 2,1 };
+            ////   fuck[1] = new int[3] { 1,1,0 };
+            ////   fuck[2] = new int[3] { 0,1,1 };
+            //   sa.OrangesRotting(fuck);\
+        }
+
+        private void btn_deleteCustomRoll_Click(object sender, EventArgs e)
+        {
+            var data = FileIO.LoadCSV("C:\\Users\\Scott Myers\\Documents\\DnD\\rolls.csv");
+
+            string[] headerData = new string[data[0].Length];
+            headerData = data[0].Split(',');
+            int numOfColumns = data[0].Length;
+            var rollListViewItem = new ListViewItem(headerData);
+            int columns = data[1].Split(',').Length;
+            //string[] rollColumns = data
+            for (int i = 1; i < columns; i++)
+            {
+            //    rollListViewItem.SubItems.Add()
+            }
+
+        }
+
+        static DataTable LoadTable()
+        {
+            var data = FileIO.LoadCSV("C:\\Users\\Scott Myers\\Documents\\DnD\\rolls.csv");
+            var headerData = data[0].Split(',');
+            int NumberOfColumns = headerData.Length;
+            DataTable RollHolder = new DataTable();
+            DataColumn column;
+
+            for (int col = 0; col < NumberOfColumns; col++)
+            {
+                column = new DataColumn
+                {
+                    Caption = headerData[col],
+                    ColumnName = headerData[col]
+                };
+                RollHolder.Columns.Add(column);
+            }
+
+            int NumberOfRows = data.Length;
+            for (int row = 1; row < NumberOfRows; row++)
+            {
+                var rollData = data[row].Split(',');
+                DataRow RollRow = RollHolder.NewRow();
+
+                for (int i = 0; i < NumberOfColumns; i++)
+                {
+                    RollRow[i] = rollData[i];
+                }
+                RollHolder.Rows.Add(RollRow);
+            }
+
+            return RollHolder;
+        }
     }
 }
