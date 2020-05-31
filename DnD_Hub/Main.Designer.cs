@@ -639,7 +639,6 @@
             this.btn_deleteCustomRoll.TabIndex = 3;
             this.btn_deleteCustomRoll.Text = "Delete";
             this.btn_deleteCustomRoll.UseVisualStyleBackColor = true;
-            this.btn_deleteCustomRoll.Click += new System.EventHandler(this.btn_deleteCustomRoll_Click);
             // 
             // btn_rollDiceBox
             // 

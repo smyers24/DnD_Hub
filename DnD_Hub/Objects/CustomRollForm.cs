@@ -15,11 +15,12 @@ namespace DnD.Objects
             public string RollName;
             public string RollString;
             public string Description;
+          //  public int NumberOfFields;
         }
         public CustomRollForm()
         {
             InitializeComponent();
-            ParametersSet += ParametersSet;
+           // ParametersSet += ParametersSet;
         }
          
         public RollParameters GetRollParameters()
@@ -29,7 +30,8 @@ namespace DnD.Objects
             {
                 RollName    = RollName,
                 RollString  = RollString,
-                Description = Description
+                Description = Description,
+            //    NumberOfFields = 3
             };
         }
 
@@ -44,6 +46,12 @@ namespace DnD.Objects
         {
             SetParameters();
             ParametersSet?.Invoke(this, e);
+            ActiveForm.Close();
+        }
+
+        private void btn_Cancel_Click(object sender, EventArgs e)
+        {
+            ActiveForm.Close();
         }
     }
 }

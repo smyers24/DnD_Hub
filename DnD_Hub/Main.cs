@@ -21,8 +21,9 @@ namespace DnD
         List<string> validRolls = new List<string>() { "4", "6", "8", "10", "12", "20" };
         Random rollSeed = new Random();
         RollFunctions roll = new RollFunctions();
-        EventHandler CustomRollEvent;
+        CustomRollForm CustomRollForm;
         DataTable RollTable;
+        CustomRollForm.RollParameters parameters;
 
         public Main()
         {
@@ -211,11 +212,31 @@ namespace DnD
         private void addCustomRoll(object sender, EventArgs e)
         {
             //var roll = new CustomRoll();
-            var rollForm = new CustomRollForm();
-            rollForm.Show();
-       //     CustomRollEvent += rollForm.FormClosed;
-            rollForm.Dispose();
+            CustomRollForm = new CustomRollForm();
+            CustomRollForm.Show();
+            CustomRollForm.ParametersSet += new EventHandler(AddNewRollToTable);
         }
+
+        private void AddNewRollToTable(object sender, EventArgs e)
+        {
+            AddRowToTable();
+        }
+
+        private void AddRowToTable()
+        {
+            //This method is very poorly written/susceptible to breaking when/if more fields are added
+            var parameters = CustomRollForm.GetRollParameters();
+
+            DataRow RollRow = RollTable.NewRow();
+            //  var fields = parameters.NumberOfFields;
+            RollRow[0] = parameters.RollName;
+            RollRow[1] = parameters.RollString;
+            RollRow[2] = parameters.Description;
+            RollTable.Rows.Add(RollRow);
+
+            CustomRollForm.Dispose();
+        }
+
 
         private void btn_modifyCustomRoll_Click(object sender, EventArgs e)
         {
@@ -225,23 +246,6 @@ namespace DnD
             ////   fuck[1] = new int[3] { 1,1,0 };
             ////   fuck[2] = new int[3] { 0,1,1 };
             //   sa.OrangesRotting(fuck);\
-        }
-
-        private void btn_deleteCustomRoll_Click(object sender, EventArgs e)
-        {
-            var data = FileIO.LoadCSV("C:\\Users\\Scott Myers\\Documents\\DnD\\rolls.csv");
-
-            string[] headerData = new string[data[0].Length];
-            headerData = data[0].Split(',');
-            int numOfColumns = data[0].Length;
-            var rollListViewItem = new ListViewItem(headerData);
-            int columns = data[1].Split(',').Length;
-            //string[] rollColumns = data
-            for (int i = 1; i < columns; i++)
-            {
-            //    rollListViewItem.SubItems.Add()
-            }
-
         }
 
         static DataTable LoadTable()
