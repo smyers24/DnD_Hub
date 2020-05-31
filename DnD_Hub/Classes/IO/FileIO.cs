@@ -3,6 +3,9 @@ using System.IO;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Text;
+using System.Data;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace IO
 {
@@ -38,9 +41,24 @@ namespace IO
             }
         }
 
-        public static void WriteDataToCSV(string[][] data)
+        public static void WriteDataToCSV(DataTable dt)
         {
-            var csvData = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
+            IEnumerable<string> columnNames = dt.Columns.Cast<DataColumn>().
+                                              Select(column => column.ColumnName);
+            sb.AppendLine(string.Join(",", columnNames));
+
+            foreach (DataRow row in dt.Rows)
+            {
+                IEnumerable<string> fields = row.ItemArray.Select(field => field.ToString());
+                sb.AppendLine(string.Join(",", fields));
+            }
+            var systemPath = System.Environment.
+                             GetFolderPath(
+                                 Environment.SpecialFolder.CommonApplicationData
+                             );
+            var complete = Path.Combine(systemPath, "rolls.csv");
+            File.WriteAllText(complete, sb.ToString());
         }
 
         public static string[] LoadCSV(string fileName)

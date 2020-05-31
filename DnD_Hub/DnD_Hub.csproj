@@ -48,7 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\DnD\CustomRollObj.cs" />
     <Compile Include="Classes\IO\FileIO.cs" />
     <Compile Include="Classes\DnD\RollRegex.cs" />
     <Compile Include="Main.cs">
@@ -63,7 +62,6 @@
     <Compile Include="Objects\CustomRollForm.Designer.cs">
       <DependentUpon>CustomRollForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Objects\RollObj.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\DnD\RollMethods.cs" />

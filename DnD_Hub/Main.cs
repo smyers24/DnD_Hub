@@ -166,6 +166,14 @@ namespace DnD
             Properties.Settings.Default.ss_charHPcurr = tb_charHPcurr.Text;
             Properties.Settings.Default.ss_charHPmax = tb_charHPmax.Text;
             Properties.Settings.Default.ss_charAC = tb_charAC.Text;
+            try
+            {
+                FileIO.WriteDataToCSV(RollTable);
+            }
+            catch (NullReferenceException)
+            {
+                return;
+            }
         }
 
         private void loadSettings(object sender, EventArgs e)
@@ -174,8 +182,23 @@ namespace DnD
             tb_charHPcurr.Text = Properties.Settings.Default.ss_charHPcurr;
             tb_charHPmax.Text = Properties.Settings.Default.ss_charHPmax;
             tb_charAC.Text = Properties.Settings.Default.ss_charAC;
+            try
+            {
+                RollTable = LoadTable();
+            }
+            catch(FileNotFoundException)
+            {
+                return;
+            }
 
-            RollTable = LoadTable();
+            DGV_Rolls.AllowUserToAddRows = false;
+            DGV_Rolls.AllowUserToDeleteRows = false;
+            DGV_Rolls.AllowUserToOrderColumns = true;
+            DGV_Rolls.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            DGV_Rolls.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders; // Appears that this line should be `AllCells` to avoid the problem you are facing
+            DGV_Rolls.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DGV_Rolls.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+                     
             DGV_Rolls.DataSource = RollTable;
         }
 
@@ -187,7 +210,7 @@ namespace DnD
 
         private void addCustomRoll(object sender, EventArgs e)
         {
-            var roll = new CustomRoll();
+            //var roll = new CustomRoll();
             var rollForm = new CustomRollForm();
             rollForm.Show();
        //     CustomRollEvent += rollForm.FormClosed;
@@ -223,12 +246,17 @@ namespace DnD
 
         static DataTable LoadTable()
         {
-            var data = FileIO.LoadCSV("C:\\Users\\Scott Myers\\Documents\\DnD\\rolls.csv");
+            var systemPath = System.Environment.
+                 GetFolderPath(
+                     Environment.SpecialFolder.CommonApplicationData
+                 );
+            var complete = Path.Combine(systemPath, "rolls.csv");
+
+            var data = FileIO.LoadCSV(complete);
             var headerData = data[0].Split(',');
             int NumberOfColumns = headerData.Length;
             DataTable RollHolder = new DataTable();
             DataColumn column;
-
             for (int col = 0; col < NumberOfColumns; col++)
             {
                 column = new DataColumn
@@ -253,6 +281,17 @@ namespace DnD
             }
 
             return RollHolder;
+        }
+
+        private void TriggerCustomRoll(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            int SelectedRow = e.RowIndex;
+            if (SelectedRow == 0)
+                return;
+            else
+            {
+
+            }
         }
     }
 }

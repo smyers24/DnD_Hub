@@ -32,11 +32,6 @@
             this.rollGroupBox = new System.Windows.Forms.GroupBox();
             this.diceGroupBox = new System.Windows.Forms.GroupBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.lv_customRolls = new System.Windows.Forms.ListView();
-            this.cust_Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.cust_Roll = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.cust_Level = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.cust_Desc = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label_manualTotal = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label_dbTotal = new System.Windows.Forms.Label();
@@ -114,6 +109,7 @@
             this.tab_map = new System.Windows.Forms.TabPage();
             this.mapBrowser = new System.Windows.Forms.WebBrowser();
             this.DGV_Rolls = new System.Windows.Forms.DataGridView();
+            this.label11 = new System.Windows.Forms.Label();
             this.rollGroupBox.SuspendLayout();
             this.diceGroupBox.SuspendLayout();
             this.panel_d20.SuspendLayout();
@@ -144,13 +140,14 @@
             // 
             // diceGroupBox
             // 
+            this.diceGroupBox.Controls.Add(this.DGV_Rolls);
             this.diceGroupBox.Controls.Add(this.label13);
-            this.diceGroupBox.Controls.Add(this.lv_customRolls);
             this.diceGroupBox.Controls.Add(this.label_manualTotal);
             this.diceGroupBox.Controls.Add(this.label12);
             this.diceGroupBox.Controls.Add(this.label_dbTotal);
             this.diceGroupBox.Controls.Add(this.cb_saveRoll);
             this.diceGroupBox.Controls.Add(this.panel_d20);
+            this.diceGroupBox.Controls.Add(this.label11);
             this.diceGroupBox.Controls.Add(this.label10);
             this.diceGroupBox.Controls.Add(this.panel_d10);
             this.diceGroupBox.Controls.Add(this.tb_rollString);
@@ -173,51 +170,16 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(24, 370);
+            this.label13.Location = new System.Drawing.Point(20, 425);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(34, 13);
             this.label13.TabIndex = 10;
             this.label13.Text = "Total:";
             // 
-            // lv_customRolls
-            // 
-            this.lv_customRolls.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.cust_Name,
-            this.cust_Roll,
-            this.cust_Level,
-            this.cust_Desc});
-            this.lv_customRolls.HideSelection = false;
-            this.lv_customRolls.Location = new System.Drawing.Point(15, 147);
-            this.lv_customRolls.Name = "lv_customRolls";
-            this.lv_customRolls.Size = new System.Drawing.Size(588, 97);
-            this.lv_customRolls.TabIndex = 11;
-            this.lv_customRolls.UseCompatibleStateImageBehavior = false;
-            this.lv_customRolls.View = System.Windows.Forms.View.Details;
-            // 
-            // cust_Name
-            // 
-            this.cust_Name.Text = "Name";
-            this.cust_Name.Width = 121;
-            // 
-            // cust_Roll
-            // 
-            this.cust_Roll.Text = "Roll";
-            this.cust_Roll.Width = 125;
-            // 
-            // cust_Level
-            // 
-            this.cust_Level.Text = "Level";
-            this.cust_Level.Width = 39;
-            // 
-            // cust_Desc
-            // 
-            this.cust_Desc.Text = "Description";
-            this.cust_Desc.Width = 297;
-            // 
             // label_manualTotal
             // 
             this.label_manualTotal.AutoSize = true;
-            this.label_manualTotal.Location = new System.Drawing.Point(79, 370);
+            this.label_manualTotal.Location = new System.Drawing.Point(75, 425);
             this.label_manualTotal.Name = "label_manualTotal";
             this.label_manualTotal.Size = new System.Drawing.Size(0, 13);
             this.label_manualTotal.TabIndex = 10;
@@ -242,7 +204,7 @@
             // cb_saveRoll
             // 
             this.cb_saveRoll.AutoSize = true;
-            this.cb_saveRoll.Location = new System.Drawing.Point(204, 344);
+            this.cb_saveRoll.Location = new System.Drawing.Point(200, 399);
             this.cb_saveRoll.Name = "cb_saveRoll";
             this.cb_saveRoll.Size = new System.Drawing.Size(73, 17);
             this.cb_saveRoll.TabIndex = 6;
@@ -316,7 +278,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(20, 327);
+            this.label10.Location = new System.Drawing.Point(16, 382);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(55, 13);
             this.label10.TabIndex = 4;
@@ -388,7 +350,7 @@
             // 
             // tb_rollString
             // 
-            this.tb_rollString.Location = new System.Drawing.Point(19, 342);
+            this.tb_rollString.Location = new System.Drawing.Point(15, 397);
             this.tb_rollString.Name = "tb_rollString";
             this.tb_rollString.Size = new System.Drawing.Size(163, 20);
             this.tb_rollString.TabIndex = 5;
@@ -523,7 +485,7 @@
             // 
             // btn_addCustomRoll
             // 
-            this.btn_addCustomRoll.Location = new System.Drawing.Point(15, 280);
+            this.btn_addCustomRoll.Location = new System.Drawing.Point(331, 388);
             this.btn_addCustomRoll.Name = "btn_addCustomRoll";
             this.btn_addCustomRoll.Size = new System.Drawing.Size(75, 23);
             this.btn_addCustomRoll.TabIndex = 3;
@@ -533,7 +495,7 @@
             // 
             // btn_modifyCustomRoll
             // 
-            this.btn_modifyCustomRoll.Location = new System.Drawing.Point(107, 280);
+            this.btn_modifyCustomRoll.Location = new System.Drawing.Point(423, 388);
             this.btn_modifyCustomRoll.Name = "btn_modifyCustomRoll";
             this.btn_modifyCustomRoll.Size = new System.Drawing.Size(75, 23);
             this.btn_modifyCustomRoll.TabIndex = 3;
@@ -671,7 +633,7 @@
             // 
             // btn_deleteCustomRoll
             // 
-            this.btn_deleteCustomRoll.Location = new System.Drawing.Point(202, 280);
+            this.btn_deleteCustomRoll.Location = new System.Drawing.Point(518, 388);
             this.btn_deleteCustomRoll.Name = "btn_deleteCustomRoll";
             this.btn_deleteCustomRoll.Size = new System.Drawing.Size(75, 23);
             this.btn_deleteCustomRoll.TabIndex = 3;
@@ -691,7 +653,7 @@
             // 
             // btn_ManualRoll
             // 
-            this.btn_ManualRoll.Location = new System.Drawing.Point(19, 394);
+            this.btn_ManualRoll.Location = new System.Drawing.Point(15, 449);
             this.btn_ManualRoll.Name = "btn_ManualRoll";
             this.btn_ManualRoll.Size = new System.Drawing.Size(75, 23);
             this.btn_ManualRoll.TabIndex = 3;
@@ -893,7 +855,6 @@
             // 
             // tab_overview
             // 
-            this.tab_overview.Controls.Add(this.DGV_Rolls);
             this.tab_overview.Controls.Add(this.characterGroupBox);
             this.tab_overview.Controls.Add(this.fileGroupBox);
             this.tab_overview.Controls.Add(this.rollChest);
@@ -929,11 +890,25 @@
             // 
             // DGV_Rolls
             // 
+            this.DGV_Rolls.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.DGV_Rolls.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.DGV_Rolls.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGV_Rolls.Location = new System.Drawing.Point(734, 123);
+            this.DGV_Rolls.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
+            this.DGV_Rolls.Location = new System.Drawing.Point(15, 146);
+            this.DGV_Rolls.MultiSelect = false;
             this.DGV_Rolls.Name = "DGV_Rolls";
-            this.DGV_Rolls.Size = new System.Drawing.Size(364, 204);
+            this.DGV_Rolls.Size = new System.Drawing.Size(596, 178);
             this.DGV_Rolls.TabIndex = 9;
+            this.DGV_Rolls.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.TriggerCustomRoll);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(15, 327);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(151, 13);
+            this.label11.TabIndex = 4;
+            this.label11.Text = "Select a cell and hit \'F2\' to edit";
             // 
             // Main
             // 
@@ -1055,12 +1030,8 @@
         private System.Windows.Forms.Label label_dbTotal;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label_manualTotal;
-        private System.Windows.Forms.ListView lv_customRolls;
-        private System.Windows.Forms.ColumnHeader cust_Name;
-        private System.Windows.Forms.ColumnHeader cust_Roll;
-        private System.Windows.Forms.ColumnHeader cust_Level;
-        private System.Windows.Forms.ColumnHeader cust_Desc;
         private System.Windows.Forms.DataGridView DGV_Rolls;
+        private System.Windows.Forms.Label label11;
     }
 }
 
