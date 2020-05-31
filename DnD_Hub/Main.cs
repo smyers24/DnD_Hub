@@ -20,7 +20,6 @@ namespace DnD
         List<string> diceTBlist = new List<string>() { "d4RollNum", "d6RollNum", "d8RollNum", "d10RollNum", "d12RollNum", "d20RollNum" };
         List<string> validRolls = new List<string>() { "4", "6", "8", "10", "12", "20" };
         Random rollSeed = new Random();
-        RollFunctions roll = new RollFunctions();
         CustomRollForm CustomRollForm;
         DataTable RollTable;
         CustomRollForm.RollParameters parameters;
@@ -50,7 +49,7 @@ namespace DnD
             panel_d4.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Qty")).First();
             TextBox tb_Qty = panel.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Qty")).First();
             TextBox tb_Mod = panel.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Mod")).First();
-            int result = roll.rollCalc(tb_Qty.Text, dieValue, tb_Mod.Text);
+            int result = RollFunctions.RollCalc(tb_Qty.Text, dieValue, tb_Mod.Text);
             label.Text = result.ToString();
         }
 
@@ -60,7 +59,6 @@ namespace DnD
             var panels = diceGroupBox.Controls.OfType<Panel>();
             foreach (Panel panel in panels)
             {
-
                 Button dieButton = sender as Button;
                 string[] panelSplit = panel.Name.Split('d');
                 int dieValue = int.Parse(panelSplit[1]);
@@ -73,7 +71,7 @@ namespace DnD
                 TextBox tb_Mod = panel.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Mod")).First();
                 if (!string.IsNullOrEmpty(tb_Qty.Text))
                 {
-                    int result = roll.rollCalc(tb_Qty.Text, dieValue, tb_Mod.Text);
+                    int result = RollFunctions.RollCalc(tb_Qty.Text, dieValue, tb_Mod.Text);
                     label.Text = result.ToString();
                     total += result;
                 }
@@ -111,16 +109,22 @@ namespace DnD
 
         private void manualRollString(object sender, EventArgs e)
         {
-            parseRoll(tb_rollString.Text);
+            var result = parseRoll(tb_rollString.Text);
+
+            label_manualTotal.Text = result.Total;
+
             if (!cb_saveRoll.Checked)
                 tb_rollString.Text = "";
         }
-        private void parseRoll(string rollString)
+        private (string Total, string[] IndividualRolls) parseRoll(string rollString)
         {
             int total = 0;
             string processingType = "";
             DieRegex.parseRoll(rollString);
             string[] rollTokens = rollString.Split('+', '-');
+            string[] indivRolls = new string[rollTokens.Length];
+            int indivIndex = 0;
+            int result;
             foreach (string individualRoll in rollTokens)
             {
                 string[] rollValue = individualRoll.Split('d');
@@ -139,19 +143,26 @@ namespace DnD
                         if (!validRolls.Contains(rollValue[1]))
                         {
                             MessageBox.Show(rollValue[1] + " is not a valid die. Please check your roll string", "Roll check", MessageBoxButtons.OK);
-                            return;
+                            return (string.Empty, new string[0]);
                         }
                         else
                         {
-                            total += roll.roll(Convert.ToInt16(rollValue[0]), Convert.ToInt16(rollValue[1]));
+                            result = RollFunctions.Roll(Convert.ToInt16(rollValue[0]), Convert.ToInt16(rollValue[1]));
+                            total += result;
+                            indivRolls[indivIndex] = result.ToString();
+                            indivIndex++;
                         }
                         break;
+
                     case "integer":
+                        result = int.Parse(rollValue[0]);
                         total += int.Parse(rollValue[0]);
+                        indivRolls[indivIndex] = result.ToString();
+                        indivIndex++;
                         break;
                 }
             }
-            label_manualTotal.Text = total.ToString();
+            return (total.ToString(), indivRolls);
         }
 
         private void openFileBrowser(object sender, EventArgs e)
@@ -193,8 +204,9 @@ namespace DnD
             }
 
             DGV_Rolls.AllowUserToAddRows = false;
-            DGV_Rolls.AllowUserToDeleteRows = false;
+            DGV_Rolls.AllowUserToDeleteRows = true;
             DGV_Rolls.AllowUserToOrderColumns = true;
+            DGV_Rolls.EditMode = DataGridViewEditMode.EditOnF2;
             DGV_Rolls.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DGV_Rolls.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders; // Appears that this line should be `AllCells` to avoid the problem you are facing
             DGV_Rolls.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -240,12 +252,12 @@ namespace DnD
 
         private void btn_modifyCustomRoll_Click(object sender, EventArgs e)
         {
-            //   Solution sa = new Solution();
-            //   int[][] fuck = new int[1][];
-            //   fuck[0] = new int[2] { 2,1 };
+            //Solution sa = new Solution();
+            //int[][] fuck = new int[1][];
+            //fuck[0] = new int[2] { 2, 1 };
             ////   fuck[1] = new int[3] { 1,1,0 };
             ////   fuck[2] = new int[3] { 0,1,1 };
-            //   sa.OrangesRotting(fuck);\
+            //sa.OrangesRotting(fuck);\
         }
 
         static DataTable LoadTable()
@@ -290,12 +302,29 @@ namespace DnD
         private void TriggerCustomRoll(object sender, DataGridViewCellMouseEventArgs e)
         {
             int SelectedRow = e.RowIndex;
-            if (SelectedRow == 0)
-                return;
-            else
-            {
+            var row = RollTable.Rows[SelectedRow];
+            var RollToParse = row[1].ToString();
 
+            var (Total, IndividualRolls) = parseRoll(RollToParse);
+
+            var finalResult = CombineTotalAndIndivRolls(Total, IndividualRolls);
+            lbl_TableRoll.Text = finalResult;
+        }
+
+        private string CombineTotalAndIndivRolls(string total, string[] indivRoll)
+        {
+            var sb = new StringBuilder();
+            sb.Append(total + " (");
+            int numOfRolls = indivRoll.Length;
+            for (int i =0; i<numOfRolls; i++)
+            {
+                sb.Append(indivRoll[i] + " ,");
             }
+            int sbLength = sb.Length;
+            sb.Remove(sbLength - 1, 1); //Removes the extra comma at the end
+
+            sb.Append(")");
+            return sb.ToString();
         }
     }
 }

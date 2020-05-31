@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.rollGroupBox = new System.Windows.Forms.GroupBox();
             this.diceGroupBox = new System.Windows.Forms.GroupBox();
+            this.DGV_Rolls = new System.Windows.Forms.DataGridView();
             this.label13 = new System.Windows.Forms.Label();
             this.label_manualTotal = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -43,6 +44,7 @@
             this.tb_d20Mod = new System.Windows.Forms.TextBox();
             this.label_d20Result = new System.Windows.Forms.Label();
             this.chkbox_d20Vantage = new System.Windows.Forms.CheckBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.panel_d10 = new System.Windows.Forms.Panel();
             this.tb_d10Qty = new System.Windows.Forms.TextBox();
@@ -108,10 +110,11 @@
             this.tab_overview = new System.Windows.Forms.TabPage();
             this.tab_map = new System.Windows.Forms.TabPage();
             this.mapBrowser = new System.Windows.Forms.WebBrowser();
-            this.DGV_Rolls = new System.Windows.Forms.DataGridView();
-            this.label11 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.lbl_TableRoll = new System.Windows.Forms.Label();
             this.rollGroupBox.SuspendLayout();
             this.diceGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_Rolls)).BeginInit();
             this.panel_d20.SuspendLayout();
             this.panel_d10.SuspendLayout();
             this.panel_d6.SuspendLayout();
@@ -124,7 +127,6 @@
             this.tabControl.SuspendLayout();
             this.tab_overview.SuspendLayout();
             this.tab_map.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGV_Rolls)).BeginInit();
             this.SuspendLayout();
             // 
             // rollGroupBox
@@ -148,6 +150,8 @@
             this.diceGroupBox.Controls.Add(this.cb_saveRoll);
             this.diceGroupBox.Controls.Add(this.panel_d20);
             this.diceGroupBox.Controls.Add(this.label11);
+            this.diceGroupBox.Controls.Add(this.lbl_TableRoll);
+            this.diceGroupBox.Controls.Add(this.label14);
             this.diceGroupBox.Controls.Add(this.label10);
             this.diceGroupBox.Controls.Add(this.panel_d10);
             this.diceGroupBox.Controls.Add(this.tb_rollString);
@@ -166,6 +170,19 @@
             this.diceGroupBox.TabIndex = 7;
             this.diceGroupBox.TabStop = false;
             this.diceGroupBox.Text = "Dice Box";
+            // 
+            // DGV_Rolls
+            // 
+            this.DGV_Rolls.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.DGV_Rolls.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.DGV_Rolls.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGV_Rolls.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
+            this.DGV_Rolls.Location = new System.Drawing.Point(15, 146);
+            this.DGV_Rolls.MultiSelect = false;
+            this.DGV_Rolls.Name = "DGV_Rolls";
+            this.DGV_Rolls.Size = new System.Drawing.Size(596, 178);
+            this.DGV_Rolls.TabIndex = 9;
+            this.DGV_Rolls.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.TriggerCustomRoll);
             // 
             // label13
             // 
@@ -274,6 +291,15 @@
             this.chkbox_d20Vantage.TabIndex = 7;
             this.chkbox_d20Vantage.Text = "Dis / Ad";
             this.chkbox_d20Vantage.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(459, 128);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(151, 13);
+            this.label11.TabIndex = 4;
+            this.label11.Text = "Select a cell and hit \'F2\' to edit";
             // 
             // label10
             // 
@@ -887,27 +913,23 @@
             this.mapBrowser.Size = new System.Drawing.Size(1126, 796);
             this.mapBrowser.TabIndex = 0;
             // 
-            // DGV_Rolls
+            // label14
             // 
-            this.DGV_Rolls.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.DGV_Rolls.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.DGV_Rolls.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGV_Rolls.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
-            this.DGV_Rolls.Location = new System.Drawing.Point(15, 146);
-            this.DGV_Rolls.MultiSelect = false;
-            this.DGV_Rolls.Name = "DGV_Rolls";
-            this.DGV_Rolls.Size = new System.Drawing.Size(596, 178);
-            this.DGV_Rolls.TabIndex = 9;
-            this.DGV_Rolls.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.TriggerCustomRoll);
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(15, 333);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(37, 13);
+            this.label14.TabIndex = 4;
+            this.label14.Text = "Total: ";
             // 
-            // label11
+            // lbl_TableRoll
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(15, 327);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(151, 13);
-            this.label11.TabIndex = 4;
-            this.label11.Text = "Select a cell and hit \'F2\' to edit";
+            this.lbl_TableRoll.AutoSize = true;
+            this.lbl_TableRoll.Location = new System.Drawing.Point(58, 333);
+            this.lbl_TableRoll.Name = "lbl_TableRoll";
+            this.lbl_TableRoll.Size = new System.Drawing.Size(37, 13);
+            this.lbl_TableRoll.TabIndex = 4;
+            this.lbl_TableRoll.Text = "Total: ";
             // 
             // Main
             // 
@@ -924,6 +946,7 @@
             this.rollGroupBox.ResumeLayout(false);
             this.diceGroupBox.ResumeLayout(false);
             this.diceGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_Rolls)).EndInit();
             this.panel_d20.ResumeLayout(false);
             this.panel_d20.PerformLayout();
             this.panel_d10.ResumeLayout(false);
@@ -944,7 +967,6 @@
             this.tabControl.ResumeLayout(false);
             this.tab_overview.ResumeLayout(false);
             this.tab_map.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.DGV_Rolls)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1031,6 +1053,8 @@
         private System.Windows.Forms.Label label_manualTotal;
         private System.Windows.Forms.DataGridView DGV_Rolls;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lbl_TableRoll;
+        private System.Windows.Forms.Label label14;
     }
 }
 

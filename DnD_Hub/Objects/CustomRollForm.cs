@@ -46,7 +46,7 @@ namespace DnD.Objects
         {
             SetParameters();
             ParametersSet?.Invoke(this, e);
-            ActiveForm.Close();
+            this.Hide();
         }
 
         private void btn_Cancel_Click(object sender, EventArgs e)

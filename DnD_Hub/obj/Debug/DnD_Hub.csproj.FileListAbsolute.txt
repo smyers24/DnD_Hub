@@ -20,3 +20,6 @@ C:\SVN\Py\oops\git\DnD_Hub\DnD_Hub\obj\Debug\DnD_Hub.CustomAtkForm.CustomAttack.
 Q:\Coding\GitHub\DnD_Hub\DnD_Hub\obj\Debug\DnD.Main.resources
 Q:\Coding\GitHub\DnD_Hub\DnD_Hub\obj\Debug\DnD.Objects.CustomRollForm.resources
 Q:\Coding\GitHub\DnD_Hub\DnD_Hub\obj\Debug\DnD.Properties.Resources.resources
+Q:\Coding\GitHub\DnD_Hub\DnD_Hub\bin\Debug\System.ValueTuple.dll
+Q:\Coding\GitHub\DnD_Hub\DnD_Hub\bin\Debug\System.ValueTuple.xml
+Q:\Coding\GitHub\DnD_Hub\DnD_Hub\obj\Debug\DnD_Hub.csproj.CopyComplete
