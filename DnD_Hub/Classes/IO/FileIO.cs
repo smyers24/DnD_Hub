@@ -40,8 +40,7 @@ namespace IO
                 MessageBox.Show("Invalid file selection: " + fileName);
             }
         }
-
-        public static void WriteDataToCSV(DataTable dt)
+        public static void WriteDataToCSV(DataTable dt, string fileName)
         {
             StringBuilder sb = new StringBuilder();
             IEnumerable<string> columnNames = dt.Columns.Cast<DataColumn>().
@@ -53,14 +52,10 @@ namespace IO
                 IEnumerable<string> fields = row.ItemArray.Select(field => field.ToString());
                 sb.AppendLine(string.Join(",", fields));
             }
-            var systemPath = System.Environment.
-                             GetFolderPath(
-                                 Environment.SpecialFolder.CommonApplicationData
-                             );
-            var complete = Path.Combine(systemPath, "rolls.csv");
+            var systemPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+            var complete = Path.Combine(systemPath, fileName);
             File.WriteAllText(complete, sb.ToString());
         }
-
         public static string[] LoadCSV(string fileName)
         {
             var data = File.ReadAllLines(fileName);

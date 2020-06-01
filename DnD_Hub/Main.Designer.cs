@@ -40,8 +40,8 @@
             this.panel_d20 = new System.Windows.Forms.Panel();
             this.tb_d20Qty = new System.Windows.Forms.TextBox();
             this.btn_d20 = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
             this.tb_d20Mod = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.label_d20Result = new System.Windows.Forms.Label();
             this.chkbox_d20Vantage = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -51,23 +51,23 @@
             this.panel_d10 = new System.Windows.Forms.Panel();
             this.tb_d10Qty = new System.Windows.Forms.TextBox();
             this.btn_d10 = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
             this.tb_d10Mod = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.label_d10Result = new System.Windows.Forms.Label();
             this.chkbox_d10Vantage = new System.Windows.Forms.CheckBox();
             this.tb_rollString = new System.Windows.Forms.TextBox();
             this.panel_d6 = new System.Windows.Forms.Panel();
             this.btn_d6 = new System.Windows.Forms.Button();
             this.tb_d6Qty = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.tb_d6Mod = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.label_d6Result = new System.Windows.Forms.Label();
             this.chkbox_d6Vantage = new System.Windows.Forms.CheckBox();
             this.panel_d12 = new System.Windows.Forms.Panel();
             this.tb_d12Qty = new System.Windows.Forms.TextBox();
             this.btn_d12 = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
             this.tb_d12Mod = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.label_d12Result = new System.Windows.Forms.Label();
             this.chkbox_d12Vantage = new System.Windows.Forms.CheckBox();
             this.btn_addCustomRoll = new System.Windows.Forms.Button();
@@ -96,8 +96,8 @@
             this.tb_charAC = new System.Windows.Forms.TextBox();
             this.tb_charHPcurr = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.acLabel = new System.Windows.Forms.Label();
             this.tb_charName = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.fileGroupBox = new System.Windows.Forms.GroupBox();
@@ -106,9 +106,17 @@
             this.openListBtn = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tab_overview = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.DGV_Skills = new System.Windows.Forms.DataGridView();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.DGV_SavingThrows = new System.Windows.Forms.DataGridView();
+            this.gb_RollResult = new System.Windows.Forms.GroupBox();
+            this.pb_Unlucky = new System.Windows.Forms.PictureBox();
+            this.flp_DGV = new System.Windows.Forms.FlowLayoutPanel();
+            this.lbl_FinalRoll = new System.Windows.Forms.Label();
             this.tab_map = new System.Windows.Forms.TabPage();
             this.mapBrowser = new System.Windows.Forms.WebBrowser();
-            this.flp_DGV = new System.Windows.Forms.FlowLayoutPanel();
             this.rollGroupBox.SuspendLayout();
             this.diceGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Rolls)).BeginInit();
@@ -122,6 +130,12 @@
             this.fileGroupBox.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tab_overview.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_Skills)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_SavingThrows)).BeginInit();
+            this.gb_RollResult.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Unlucky)).BeginInit();
             this.tab_map.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -138,7 +152,6 @@
             // 
             // diceGroupBox
             // 
-            this.diceGroupBox.Controls.Add(this.flp_DGV);
             this.diceGroupBox.Controls.Add(this.DGV_Rolls);
             this.diceGroupBox.Controls.Add(this.label13);
             this.diceGroupBox.Controls.Add(this.label_manualTotal);
@@ -180,6 +193,7 @@
             this.DGV_Rolls.Size = new System.Drawing.Size(596, 178);
             this.DGV_Rolls.TabIndex = 26;
             this.DGV_Rolls.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.TriggerCustomRoll);
+            this.DGV_Rolls.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ModifyCustomRollBool);
             // 
             // label13
             // 
@@ -231,8 +245,8 @@
             // 
             this.panel_d20.Controls.Add(this.tb_d20Qty);
             this.panel_d20.Controls.Add(this.btn_d20);
-            this.panel_d20.Controls.Add(this.label9);
             this.panel_d20.Controls.Add(this.tb_d20Mod);
+            this.panel_d20.Controls.Add(this.label9);
             this.panel_d20.Controls.Add(this.label_d20Result);
             this.panel_d20.Controls.Add(this.chkbox_d20Vantage);
             this.panel_d20.Location = new System.Drawing.Point(313, 72);
@@ -257,21 +271,21 @@
             this.btn_d20.UseVisualStyleBackColor = true;
             this.btn_d20.Click += new System.EventHandler(this.clickManualRoll);
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(146, 6);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(21, 13);
-            this.label9.TabIndex = 4;
-            this.label9.Text = "+/-";
-            // 
             // tb_d20Mod
             // 
             this.tb_d20Mod.Location = new System.Drawing.Point(168, 4);
             this.tb_d20Mod.Name = "tb_d20Mod";
             this.tb_d20Mod.Size = new System.Drawing.Size(31, 20);
             this.tb_d20Mod.TabIndex = 24;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(146, 6);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(13, 13);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "+";
             // 
             // label_d20Result
             // 
@@ -332,8 +346,8 @@
             // 
             this.panel_d10.Controls.Add(this.tb_d10Qty);
             this.panel_d10.Controls.Add(this.btn_d10);
-            this.panel_d10.Controls.Add(this.label7);
             this.panel_d10.Controls.Add(this.tb_d10Mod);
+            this.panel_d10.Controls.Add(this.label7);
             this.panel_d10.Controls.Add(this.label_d10Result);
             this.panel_d10.Controls.Add(this.chkbox_d10Vantage);
             this.panel_d10.Location = new System.Drawing.Point(313, 19);
@@ -358,21 +372,21 @@
             this.btn_d10.UseVisualStyleBackColor = true;
             this.btn_d10.Click += new System.EventHandler(this.clickManualRoll);
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(146, 7);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(21, 13);
-            this.label7.TabIndex = 4;
-            this.label7.Text = "+/-";
-            // 
             // tb_d10Mod
             // 
             this.tb_d10Mod.Location = new System.Drawing.Point(168, 5);
             this.tb_d10Mod.Name = "tb_d10Mod";
             this.tb_d10Mod.Size = new System.Drawing.Size(31, 20);
             this.tb_d10Mod.TabIndex = 18;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(146, 4);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(13, 13);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "+";
             // 
             // label_d10Result
             // 
@@ -404,8 +418,8 @@
             // 
             this.panel_d6.Controls.Add(this.btn_d6);
             this.panel_d6.Controls.Add(this.tb_d6Qty);
-            this.panel_d6.Controls.Add(this.label5);
             this.panel_d6.Controls.Add(this.tb_d6Mod);
+            this.panel_d6.Controls.Add(this.label5);
             this.panel_d6.Controls.Add(this.label_d6Result);
             this.panel_d6.Controls.Add(this.chkbox_d6Vantage);
             this.panel_d6.Location = new System.Drawing.Point(15, 46);
@@ -430,21 +444,21 @@
             this.tb_d6Qty.Size = new System.Drawing.Size(40, 20);
             this.tb_d6Qty.TabIndex = 10;
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(141, 6);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(21, 13);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "+/-";
-            // 
             // tb_d6Mod
             // 
             this.tb_d6Mod.Location = new System.Drawing.Point(167, 4);
             this.tb_d6Mod.Name = "tb_d6Mod";
             this.tb_d6Mod.Size = new System.Drawing.Size(31, 20);
             this.tb_d6Mod.TabIndex = 12;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(146, 6);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(13, 13);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "+";
             // 
             // label_d6Result
             // 
@@ -469,8 +483,8 @@
             // 
             this.panel_d12.Controls.Add(this.tb_d12Qty);
             this.panel_d12.Controls.Add(this.btn_d12);
-            this.panel_d12.Controls.Add(this.label8);
             this.panel_d12.Controls.Add(this.tb_d12Mod);
+            this.panel_d12.Controls.Add(this.label8);
             this.panel_d12.Controls.Add(this.label_d12Result);
             this.panel_d12.Controls.Add(this.chkbox_d12Vantage);
             this.panel_d12.Location = new System.Drawing.Point(313, 46);
@@ -495,21 +509,21 @@
             this.btn_d12.UseVisualStyleBackColor = true;
             this.btn_d12.Click += new System.EventHandler(this.clickManualRoll);
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(146, 6);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(21, 13);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "+/-";
-            // 
             // tb_d12Mod
             // 
             this.tb_d12Mod.Location = new System.Drawing.Point(168, 4);
             this.tb_d12Mod.Name = "tb_d12Mod";
             this.tb_d12Mod.Size = new System.Drawing.Size(31, 20);
             this.tb_d12Mod.TabIndex = 21;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(146, 7);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(13, 13);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "+";
             // 
             // label_d12Result
             // 
@@ -590,11 +604,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(140, 6);
+            this.label4.Location = new System.Drawing.Point(146, 5);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(21, 13);
+            this.label4.Size = new System.Drawing.Size(13, 13);
             this.label4.TabIndex = 4;
-            this.label4.Text = "+/-";
+            this.label4.Text = "+";
             // 
             // label_d4Result
             // 
@@ -655,11 +669,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(141, 3);
+            this.label6.Location = new System.Drawing.Point(146, 6);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(21, 13);
+            this.label6.Size = new System.Drawing.Size(13, 13);
             this.label6.TabIndex = 4;
-            this.label6.Text = "+/-";
+            this.label6.Text = "+";
             // 
             // label_d8Result
             // 
@@ -708,7 +722,7 @@
             this.btn_ManualRoll.TabIndex = 30;
             this.btn_ManualRoll.Text = "Manual Roll";
             this.btn_ManualRoll.UseVisualStyleBackColor = true;
-            this.btn_ManualRoll.Click += new System.EventHandler(this.manualRollString);
+            this.btn_ManualRoll.Click += new System.EventHandler(this.ManualRollString);
             // 
             // label_manualRollResult
             // 
@@ -733,14 +747,14 @@
             this.characterGroupBox.Controls.Add(this.tb_charAC);
             this.characterGroupBox.Controls.Add(this.tb_charHPcurr);
             this.characterGroupBox.Controls.Add(this.label3);
-            this.characterGroupBox.Controls.Add(this.acLabel);
             this.characterGroupBox.Controls.Add(this.tb_charName);
+            this.characterGroupBox.Controls.Add(this.label15);
             this.characterGroupBox.Controls.Add(this.label2);
             this.characterGroupBox.Controls.Add(this.label1);
             this.characterGroupBox.Controls.Add(this.btn_openCharSheet);
             this.characterGroupBox.Location = new System.Drawing.Point(22, 21);
             this.characterGroupBox.Name = "characterGroupBox";
-            this.characterGroupBox.Size = new System.Drawing.Size(387, 181);
+            this.characterGroupBox.Size = new System.Drawing.Size(184, 181);
             this.characterGroupBox.TabIndex = 4;
             this.characterGroupBox.TabStop = false;
             this.characterGroupBox.Text = "Character ";
@@ -775,21 +789,21 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "/";
             // 
-            // acLabel
-            // 
-            this.acLabel.AutoSize = true;
-            this.acLabel.Location = new System.Drawing.Point(7, 68);
-            this.acLabel.Name = "acLabel";
-            this.acLabel.Size = new System.Drawing.Size(21, 13);
-            this.acLabel.TabIndex = 4;
-            this.acLabel.Text = "AC";
-            // 
             // tb_charName
             // 
             this.tb_charName.Location = new System.Drawing.Point(43, 17);
             this.tb_charName.Name = "tb_charName";
             this.tb_charName.Size = new System.Drawing.Size(116, 20);
             this.tb_charName.TabIndex = 0;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(7, 72);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(21, 13);
+            this.label15.TabIndex = 4;
+            this.label15.Text = "AC";
             // 
             // label2
             // 
@@ -814,7 +828,7 @@
             this.fileGroupBox.Controls.Add(this.openedItemsListBox);
             this.fileGroupBox.Controls.Add(this.mapSelection);
             this.fileGroupBox.Controls.Add(this.openListBtn);
-            this.fileGroupBox.Location = new System.Drawing.Point(415, 21);
+            this.fileGroupBox.Location = new System.Drawing.Point(212, 21);
             this.fileGroupBox.Name = "fileGroupBox";
             this.fileGroupBox.Size = new System.Drawing.Size(231, 181);
             this.fileGroupBox.TabIndex = 4;
@@ -838,7 +852,7 @@
             this.mapSelection.TabIndex = 6;
             this.mapSelection.Text = "Open Map";
             this.mapSelection.UseVisualStyleBackColor = true;
-            this.mapSelection.Click += new System.EventHandler(this.openMap);
+            this.mapSelection.Click += new System.EventHandler(this.OpenMap);
             // 
             // openListBtn
             // 
@@ -857,21 +871,123 @@
             this.tabControl.Location = new System.Drawing.Point(12, 12);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(990, 765);
+            this.tabControl.Size = new System.Drawing.Size(1036, 765);
             this.tabControl.TabIndex = 5;
             // 
             // tab_overview
             // 
+            this.tab_overview.Controls.Add(this.groupBox1);
             this.tab_overview.Controls.Add(this.characterGroupBox);
+            this.tab_overview.Controls.Add(this.gb_RollResult);
             this.tab_overview.Controls.Add(this.fileGroupBox);
             this.tab_overview.Controls.Add(this.rollGroupBox);
             this.tab_overview.Location = new System.Drawing.Point(4, 22);
             this.tab_overview.Name = "tab_overview";
             this.tab_overview.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_overview.Size = new System.Drawing.Size(982, 739);
+            this.tab_overview.Size = new System.Drawing.Size(1028, 739);
             this.tab_overview.TabIndex = 0;
             this.tab_overview.Text = "Overview";
             this.tab_overview.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.DGV_Skills);
+            this.groupBox1.Controls.Add(this.groupBox3);
+            this.groupBox1.Controls.Add(this.groupBox2);
+            this.groupBox1.Location = new System.Drawing.Point(670, 21);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(352, 699);
+            this.groupBox1.TabIndex = 4;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Character Roll Box";
+            // 
+            // DGV_Skills
+            // 
+            this.DGV_Skills.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.DGV_Skills.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.DGV_Skills.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGV_Skills.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
+            this.DGV_Skills.Location = new System.Drawing.Point(12, 224);
+            this.DGV_Skills.MultiSelect = false;
+            this.DGV_Skills.Name = "DGV_Skills";
+            this.DGV_Skills.Size = new System.Drawing.Size(328, 463);
+            this.DGV_Skills.TabIndex = 26;
+            this.DGV_Skills.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.TriggerSkillRoll);
+            this.DGV_Skills.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ModifySkillsBool);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Location = new System.Drawing.Point(6, 206);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(340, 487);
+            this.groupBox3.TabIndex = 4;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Skills";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.DGV_SavingThrows);
+            this.groupBox2.Location = new System.Drawing.Point(6, 20);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(340, 180);
+            this.groupBox2.TabIndex = 4;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Saving Throws";
+            // 
+            // DGV_SavingThrows
+            // 
+            this.DGV_SavingThrows.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.DGV_SavingThrows.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.DGV_SavingThrows.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGV_SavingThrows.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
+            this.DGV_SavingThrows.Location = new System.Drawing.Point(6, 19);
+            this.DGV_SavingThrows.MultiSelect = false;
+            this.DGV_SavingThrows.Name = "DGV_SavingThrows";
+            this.DGV_SavingThrows.Size = new System.Drawing.Size(328, 155);
+            this.DGV_SavingThrows.TabIndex = 26;
+            this.DGV_SavingThrows.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.TriggerSavingThrowRoll);
+            this.DGV_SavingThrows.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ModifySavingThrowsBool);
+            // 
+            // gb_RollResult
+            // 
+            this.gb_RollResult.Controls.Add(this.pb_Unlucky);
+            this.gb_RollResult.Controls.Add(this.flp_DGV);
+            this.gb_RollResult.Controls.Add(this.lbl_FinalRoll);
+            this.gb_RollResult.Location = new System.Drawing.Point(451, 21);
+            this.gb_RollResult.Name = "gb_RollResult";
+            this.gb_RollResult.Size = new System.Drawing.Size(213, 181);
+            this.gb_RollResult.TabIndex = 4;
+            this.gb_RollResult.TabStop = false;
+            this.gb_RollResult.Text = "Roll Result";
+            // 
+            // pb_Unlucky
+            // 
+            this.pb_Unlucky.Enabled = false;
+            this.pb_Unlucky.Image = ((System.Drawing.Image)(resources.GetObject("pb_Unlucky.Image")));
+            this.pb_Unlucky.Location = new System.Drawing.Point(39, 50);
+            this.pb_Unlucky.Name = "pb_Unlucky";
+            this.pb_Unlucky.Size = new System.Drawing.Size(127, 125);
+            this.pb_Unlucky.TabIndex = 12;
+            this.pb_Unlucky.TabStop = false;
+            this.pb_Unlucky.Visible = false;
+            // 
+            // flp_DGV
+            // 
+            this.flp_DGV.Location = new System.Drawing.Point(6, 131);
+            this.flp_DGV.Name = "flp_DGV";
+            this.flp_DGV.Size = new System.Drawing.Size(201, 26);
+            this.flp_DGV.TabIndex = 11;
+            // 
+            // lbl_FinalRoll
+            // 
+            this.lbl_FinalRoll.AutoSize = true;
+            this.lbl_FinalRoll.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_FinalRoll.Location = new System.Drawing.Point(62, 16);
+            this.lbl_FinalRoll.Name = "lbl_FinalRoll";
+            this.lbl_FinalRoll.Size = new System.Drawing.Size(108, 39);
+            this.lbl_FinalRoll.TabIndex = 10;
+            this.lbl_FinalRoll.Text = "Total:";
+            this.lbl_FinalRoll.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // tab_map
             // 
@@ -879,7 +995,7 @@
             this.tab_map.Location = new System.Drawing.Point(4, 22);
             this.tab_map.Name = "tab_map";
             this.tab_map.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_map.Size = new System.Drawing.Size(674, 739);
+            this.tab_map.Size = new System.Drawing.Size(1028, 739);
             this.tab_map.TabIndex = 1;
             this.tab_map.Text = "Map";
             this.tab_map.UseVisualStyleBackColor = true;
@@ -890,15 +1006,8 @@
             this.mapBrowser.Location = new System.Drawing.Point(3, 3);
             this.mapBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.mapBrowser.Name = "mapBrowser";
-            this.mapBrowser.Size = new System.Drawing.Size(668, 733);
+            this.mapBrowser.Size = new System.Drawing.Size(1022, 733);
             this.mapBrowser.TabIndex = 0;
-            // 
-            // flp_DGV
-            // 
-            this.flp_DGV.Location = new System.Drawing.Point(177, 333);
-            this.flp_DGV.Name = "flp_DGV";
-            this.flp_DGV.Size = new System.Drawing.Size(294, 26);
-            this.flp_DGV.TabIndex = 11;
             // 
             // Main
             // 
@@ -906,13 +1015,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(1000, 778);
+            this.ClientSize = new System.Drawing.Size(1051, 778);
             this.Controls.Add(this.tabControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
             this.Text = "Dungeons and Dragons Hub";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.saveSettings);
-            this.Load += new System.EventHandler(this.loadSettings);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SaveSettings);
+            this.Load += new System.EventHandler(this.LoadSettings);
             this.rollGroupBox.ResumeLayout(false);
             this.diceGroupBox.ResumeLayout(false);
             this.diceGroupBox.PerformLayout();
@@ -934,6 +1043,13 @@
             this.fileGroupBox.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
             this.tab_overview.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_Skills)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_SavingThrows)).EndInit();
+            this.gb_RollResult.ResumeLayout(false);
+            this.gb_RollResult.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Unlucky)).EndInit();
             this.tab_map.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -952,7 +1068,6 @@
         private System.Windows.Forms.TextBox tb_charAC;
         private System.Windows.Forms.TextBox tb_charHPcurr;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label acLabel;
         private System.Windows.Forms.TextBox tb_charName;
         private System.Windows.Forms.ListBox openedItemsListBox;
         private System.Windows.Forms.Label label10;
@@ -985,20 +1100,15 @@
         private System.Windows.Forms.TextBox tb_d10Mod;
         private System.Windows.Forms.Button btn_d4;
         private System.Windows.Forms.TextBox tb_d6Mod;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox tb_d12Mod;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btn_d8;
         private System.Windows.Forms.TextBox tb_d8Mod;
         private System.Windows.Forms.Button btn_d6;
         private System.Windows.Forms.TextBox tb_d4Mod;
         private System.Windows.Forms.Button btn_d12;
         private System.Windows.Forms.TextBox tb_d20Qty;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btn_d10;
         private System.Windows.Forms.Button btn_rollDiceBox;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox tb_d10Qty;
         private System.Windows.Forms.Button btn_d20;
         private System.Windows.Forms.TextBox tb_d6Qty;
@@ -1020,6 +1130,20 @@
         private System.Windows.Forms.Label lbl_TableRoll;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.FlowLayoutPanel flp_DGV;
+        private System.Windows.Forms.GroupBox gb_RollResult;
+        private System.Windows.Forms.Label lbl_FinalRoll;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.PictureBox pb_Unlucky;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.DataGridView DGV_Skills;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.DataGridView DGV_SavingThrows;
+        private System.Windows.Forms.Label label15;
     }
 }
 

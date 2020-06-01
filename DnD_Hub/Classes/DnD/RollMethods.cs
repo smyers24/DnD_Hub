@@ -34,7 +34,7 @@ namespace DnD.Rolls
             {
                 result += rollSeed.Next(1, dieValue + 1);
             }
-            Console.WriteLine(result);
+            //Console.WriteLine(result);
             return result;
         }
     }

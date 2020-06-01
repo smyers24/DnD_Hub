@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using System.Diagnostics;
 using DnD.Rolls;
 using IO;
 using DnD.Objects;
@@ -17,69 +14,45 @@ namespace DnD
 {
     public partial class Main : Form
     {
+        private readonly string RollsCSVName = "rolls.csv";
+        private readonly string SavingThrowsCSVName = "savingthrows.csv";
+        private readonly string SkillsCSVName = "skills.csv";
+        bool CustomRollsDirty = false;
+        bool SavingThrowsDirty = false;
+        bool SkillsDirty = false;
+
+        public enum RollTypes
+        {
+            CustomRoll,
+            SkillRoll,
+            SavingThrowRoll
+        }
         List<string> diceTBlist = new List<string>() { "d4RollNum", "d6RollNum", "d8RollNum", "d10RollNum", "d12RollNum", "d20RollNum" };
         List<string> validRolls = new List<string>() { "4", "6", "8", "10", "12", "20" };
         Random rollSeed = new Random();
         CustomRollForm CustomRollForm;
         DataTable RollTable;
-        CustomRollForm.RollParameters parameters;
+        DataTable SavingThrowsTable;
+        DataTable SkillsTable;
 
         public Main()
         {
             InitializeComponent();
-            DataTable RollTable = new DataTable("Roll Table");
-            DGV_Rolls.DataSource = RollTable;
         }
-
         private void clickManualRoll(object sender, EventArgs e)
         {
             Button dieButton = sender as Button;
             int dieValue = DieRegex.findDieValue(dieButton.Name); //get die value from button name
-            manualRoll(dieValue);
+            ManualRoll(dieValue);
         }
-
-
-        private void manualRoll(int dieValue)
+        private void UnluckyTimerEvent(object sender, EventArgs e)
         {
-            string panelName = "panel_d" + dieValue;
-            string labelName = "label_d" + dieValue + "Result";
-
-            var panel = this.Controls.Find(panelName, true).First();
-            var label = this.Controls.Find(labelName, true).First();
-            panel_d4.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Qty")).First();
-            TextBox tb_Qty = panel.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Qty")).First();
-            TextBox tb_Mod = panel.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Mod")).First();
-            int result = RollFunctions.RollCalc(tb_Qty.Text, dieValue, tb_Mod.Text);
-            label.Text = result.ToString();
+            Invoke(new Action(() =>
+           {
+               pb_Unlucky.Enabled = false;
+               pb_Unlucky.Visible = false;
+           }));
         }
-
-        private void rollConcat(object sender, EventArgs e)
-        {
-            int total = 0;
-            var panels = diceGroupBox.Controls.OfType<Panel>();
-            foreach (Panel panel in panels)
-            {
-                Button dieButton = sender as Button;
-                string[] panelSplit = panel.Name.Split('d');
-                int dieValue = int.Parse(panelSplit[1]);
-                string panelName = "panel_d" + dieValue;
-                string labelName = "label_d" + dieValue + "Result";
-
-                var label = this.Controls.Find(labelName, true).First();
-                panel_d4.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Qty")).First();
-                TextBox tb_Qty = panel.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Qty")).First();
-                TextBox tb_Mod = panel.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Mod")).First();
-                if (!string.IsNullOrEmpty(tb_Qty.Text))
-                {
-                    int result = RollFunctions.RollCalc(tb_Qty.Text, dieValue, tb_Mod.Text);
-                    label.Text = result.ToString();
-                    total += result;
-                }
-                label_dbTotal.Text = total.ToString();
-            }
-
-        }
-
         private void openListOfThings(object sender, EventArgs e)
         {
             openedItemsListBox.Items.Clear();
@@ -89,34 +62,279 @@ namespace DnD
                 openedItemsListBox.Items.Add(file);
             }
         }
-
         private void ropenItemFromList(object sender, EventArgs e)
         {
             if (openedItemsListBox.SelectedItem != null)
             {
-                Console.WriteLine(openedItemsListBox.SelectedItem.ToString());
+                //Console.WriteLine(openedItemsListBox.SelectedItem.ToString());
                 FileIO.OpenFileWithDefault(openedItemsListBox.SelectedItem.ToString());
             }
             openedItemsListBox.ClearSelected();
         }
-
-        private void openMap(object sender, EventArgs e)
+        private void OpenMap(object sender, EventArgs e)
         {
             OpenFileDialog openMap = new OpenFileDialog();
             var path = openMap.ShowDialog();
             mapBrowser.Navigate(openMap.FileName);
         }
-
-        private void manualRollString(object sender, EventArgs e)
+        private void openFileBrowser(object sender, EventArgs e)
         {
-            var result = parseRoll(tb_rollString.Text);
+            OpenFileDialog openMap = new OpenFileDialog();
+            var path = openMap.ShowDialog();
+            FileIO.OpenFileWithDefault(openMap.FileName);
+        }
+        #region DataGridView and DataTable Modification Methods
+        private void ConfigureDataGridView(DataGridView dgv)
+        {
+            //Configure the DataTable
+            dgv.AllowUserToAddRows = false;
+            dgv.AllowUserToDeleteRows = false;
+            dgv.AllowUserToOrderColumns = true;
+            dgv.MultiSelect = false;
+            dgv.EditMode = DataGridViewEditMode.EditOnF2;
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders; // Appears that this line should be `AllCells` to avoid the problem you are facing
+            dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+        }
+        private void AddNewRollToTable(object sender, EventArgs e)
+        {
+            AddRowToTable();
+        }
+        private void AddRowToTable()
+        {
+            //This method is very poorly written/susceptible to breaking when/if more fields are added
+            var parameters = CustomRollForm.GetRollParameters();
 
-            label_manualTotal.Text = result.Total;
+            DataRow RollRow = RollTable.NewRow();
+            //  var fields = parameters.NumberOfFields;
+            RollRow[0] = parameters.RollName;
+            RollRow[1] = parameters.RollString;
+            RollRow[2] = parameters.Description;
+            RollTable.Rows.Add(RollRow);
+
+            CustomRollForm.Dispose();
+        }
+
+        #endregion
+        #region Load/Save Methods 
+        private void LoadSettings(object sender, EventArgs e)
+        {
+            LoadCharacterSettings();
+            LoadSavingThrows();
+            LoadSkills();
+            LoadCustomRolls();
+        }
+
+        private void LoadCharacterSettings()
+        {
+            tb_charName.Text = Properties.Settings.Default.ss_charName;
+            tb_charHPcurr.Text = Properties.Settings.Default.ss_charHPcurr;
+            tb_charHPmax.Text = Properties.Settings.Default.ss_charHPmax;
+            tb_charAC.Text = Properties.Settings.Default.ss_charAC;
+        }
+        private void LoadSavingThrows()
+        {
+            try
+            {
+                SavingThrowsTable = LoadTable(SavingThrowsCSVName);
+            }
+            catch (FileNotFoundException)
+            {
+                return;
+            }
+            ConfigureDataGridView(DGV_SavingThrows);
+            DGV_SavingThrows.DataSource = SavingThrowsTable;
+        }
+        private void LoadSkills()
+        {
+            try
+            {
+                SkillsTable = LoadTable(SkillsCSVName);
+            }
+            catch (FileNotFoundException)
+            {
+                return;
+            }
+            ConfigureDataGridView(DGV_Skills);
+            DGV_Skills.DataSource = SkillsTable;
+        }
+        private void LoadCustomRolls()
+        {
+            try
+            {
+                RollTable = LoadTable(RollsCSVName);
+            }
+            catch (FileNotFoundException)
+            {
+                return;
+            }
+            ConfigureDataGridView(DGV_Rolls);
+            DGV_Rolls.DataSource = RollTable;
+        }
+        static DataTable LoadTable(string csvName)
+        {
+            var systemPath = System.Environment.
+                 GetFolderPath(
+                     Environment.SpecialFolder.CommonApplicationData
+                 );
+            var complete = Path.Combine(systemPath, csvName);
+
+            var data = FileIO.LoadCSV(complete);
+            var headerData = data[0].Split(',');
+            int NumberOfColumns = headerData.Length;
+            DataTable RollHolder = new DataTable();
+            DataColumn column;
+            for (int col = 0; col < NumberOfColumns; col++)
+            {
+                column = new DataColumn
+                {
+                    Caption = headerData[col],
+                    ColumnName = headerData[col]
+                };
+                RollHolder.Columns.Add(column);
+            }
+
+            int NumberOfRows = data.Length;
+            for (int row = 1; row < NumberOfRows; row++)
+            {
+                var rollData = data[row].Split(',');
+                DataRow RollRow = RollHolder.NewRow();
+
+                for (int i = 0; i < NumberOfColumns; i++)
+                {
+                    RollRow[i] = rollData[i];
+                }
+                RollHolder.Rows.Add(RollRow);
+            }
+
+            return RollHolder;
+        }
+        private void SaveSettings(object sender, FormClosingEventArgs e)
+        {
+            SaveCharacterSettings(); //NEED TO IMPLEMENT
+            //Prevent unnecessary saving by checking if fields have been modified before needing to save
+            if (!CustomRollsDirty)
+                SaveCustomRolls();
+            if (!SavingThrowsDirty)
+                SaveSavingThrows();
+            if (!SkillsDirty)
+                SaveSkills();
+        }
+        private void SaveCharacterSettings()
+        {
+            Properties.Settings.Default.ss_charName = tb_charName.Text;
+            Properties.Settings.Default.ss_charHPcurr = tb_charHPcurr.Text;
+            Properties.Settings.Default.ss_charHPmax = tb_charHPmax.Text;
+            Properties.Settings.Default.ss_charAC = tb_charAC.Text;
+        }
+        private void SaveCustomRolls()
+        {
+            try
+            {
+                FileIO.WriteDataToCSV(RollTable, RollsCSVName);
+            }
+            catch (NullReferenceException)
+            {
+                return;
+            }
+        }
+        private void SaveSavingThrows()
+        {
+            try
+            {
+                FileIO.WriteDataToCSV(SavingThrowsTable, SavingThrowsCSVName);
+            }
+            catch (NullReferenceException)
+            {
+                return;
+            }
+        }
+        private void SaveSkills()
+        {
+            try
+            {
+                FileIO.WriteDataToCSV(SkillsTable, SkillsCSVName);
+            }
+            catch (NullReferenceException)
+            {
+                return;
+            }
+        }
+        #endregion
+        #region Events 
+        private void TriggerCustomRoll(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            int SelectedRow = e.RowIndex;
+            var row = RollTable.Rows[SelectedRow];
+            var RollToParse = row[1].ToString();
+            var (Total, IndividualRolls) = ParseRoll(RollToParse);
+            var FinalResult = CombineTotalAndIndivRolls(Total, IndividualRolls);
+
+            lbl_FinalRoll.Text = Total;
+            lbl_TableRoll.Text = FinalResult;
+        }
+        private void TriggerSavingThrowRoll(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            int SelectedRow = e.RowIndex;
+            var row = SavingThrowsTable.Rows[SelectedRow];
+            int modValue = int.Parse(row[1].ToString());
+            var rollResult = RollFunctions.Roll(1, 20);
+            var total = modValue + rollResult;
+
+            lbl_FinalRoll.Text = total.ToString();
+        }
+        private void TriggerSkillRoll(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            int SelectedRow = e.RowIndex;
+            var row = SkillsTable.Rows[SelectedRow];
+            int modValue = int.Parse(row[1].ToString());
+            var rollResult = RollFunctions.Roll(1, 20);
+            var total = modValue + rollResult;
+
+            lbl_FinalRoll.Text = total.ToString();
+        }
+        private void ModifySkillsBool(object sender, DataGridViewCellEventArgs e)
+        {
+            SkillsDirty = true;
+        }
+        private void ModifySavingThrowsBool(object sender, DataGridViewCellEventArgs e)
+        {
+            SavingThrowsDirty = true;
+        }
+        private void ModifyCustomRollBool(object sender, DataGridViewCellEventArgs e)
+        {
+            CustomRollsDirty = true;
+        }
+        #endregion
+        #region Roll Methods
+        private string CombineTotalAndIndivRolls(string total, string[] indivRoll)
+        {
+            var sb = new StringBuilder();
+            sb.Append(total + "    (");
+            int numOfRolls = indivRoll.Length;
+            for (int i = 0; i < numOfRolls; i++)
+            {
+                sb.Append(indivRoll[i] + ", ");
+            }
+            int sbLength = sb.Length;
+            sb.Remove(sbLength - 2, 2); //Removes the extra comma at the end
+
+            sb.Append(")");
+            return sb.ToString();
+        }
+        private void ManualRollString(object sender, EventArgs e)
+        {
+            var (Total, IndividualRolls) = ParseRoll(tb_rollString.Text);
+            var FinalResult = CombineTotalAndIndivRolls(Total, IndividualRolls);
+
+            lbl_FinalRoll.Text = Total;
+            label_manualTotal.Text = FinalResult;
 
             if (!cb_saveRoll.Checked)
                 tb_rollString.Text = "";
         }
-        private (string Total, string[] IndividualRolls) parseRoll(string rollString)
+        private (string Total, string[] IndividualRolls) ParseRoll(string rollString)
         {
             int total = 0;
             string processingType = "";
@@ -156,7 +374,7 @@ namespace DnD
 
                     case "integer":
                         result = int.Parse(rollValue[0]);
-                        total += int.Parse(rollValue[0]);
+                        total += result;
                         indivRolls[indivIndex] = result.ToString();
                         indivIndex++;
                         break;
@@ -164,64 +382,58 @@ namespace DnD
             }
             return (total.ToString(), indivRolls);
         }
-
-        private void openFileBrowser(object sender, EventArgs e)
+        private void rollConcat(object sender, EventArgs e)
         {
-            OpenFileDialog openMap = new OpenFileDialog();
-            var path = openMap.ShowDialog();
-            FileIO.OpenFileWithDefault(openMap.FileName);
-        }
+            int total = 0;
+            var panels = diceGroupBox.Controls.OfType<Panel>();
+            foreach (Panel panel in panels)
+            {
+                Button dieButton = sender as Button;
+                string[] panelSplit = panel.Name.Split('d');
+                int dieValue = int.Parse(panelSplit[1]);
+                string panelName = "panel_d" + dieValue;
+                string labelName = "label_d" + dieValue + "Result";
 
-        private void saveSettings(object sender, FormClosingEventArgs e)
+                var label = this.Controls.Find(labelName, true).First();
+                panel_d4.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Qty")).First();
+                TextBox tb_Qty = panel.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Qty")).First();
+                TextBox tb_Mod = panel.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Mod")).First();
+                if (!string.IsNullOrEmpty(tb_Qty.Text))
+                {
+                    int result = RollFunctions.RollCalc(tb_Qty.Text, dieValue, tb_Mod.Text);
+                    label.Text = result.ToString();
+                    total += result;
+                }
+                label_dbTotal.Text = total.ToString();
+            }
+        }
+        private void ManualRoll(int dieValue)
         {
-            Properties.Settings.Default.ss_charName = tb_charName.Text;
-            Properties.Settings.Default.ss_charHPcurr = tb_charHPcurr.Text;
-            Properties.Settings.Default.ss_charHPmax = tb_charHPmax.Text;
-            Properties.Settings.Default.ss_charAC = tb_charAC.Text;
-            try
+            string panelName = "panel_d" + dieValue;
+            string labelName = "label_d" + dieValue + "Result";
+
+            var panel = this.Controls.Find(panelName, true).First();
+            var label = this.Controls.Find(labelName, true).First();
+            panel_d4.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Qty")).First();
+            TextBox tb_Qty = panel.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Qty")).First();
+            TextBox tb_Mod = panel.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Mod")).First();
+            int result = RollFunctions.RollCalc(tb_Qty.Text, dieValue, tb_Mod.Text);
+            if (result == 1 & dieValue == 20 & string.IsNullOrEmpty(tb_Mod.Text))
             {
-                FileIO.WriteDataToCSV(RollTable);
+                pb_Unlucky.Enabled = true;
+                pb_Unlucky.Visible = true;
+                var timer = new System.Timers.Timer(3500);
+                timer.Elapsed += UnluckyTimerEvent;
+                timer.Start();
             }
-            catch (NullReferenceException)
-            {
-                return;
-            }
+            lbl_FinalRoll.Text = result.ToString();
         }
-
-        private void loadSettings(object sender, EventArgs e)
-        {
-            tb_charName.Text = Properties.Settings.Default.ss_charName;
-            tb_charHPcurr.Text = Properties.Settings.Default.ss_charHPcurr;
-            tb_charHPmax.Text = Properties.Settings.Default.ss_charHPmax;
-            tb_charAC.Text = Properties.Settings.Default.ss_charAC;
-            try
-            {
-                RollTable = LoadTable();
-            }
-            catch(FileNotFoundException)
-            {
-                return;
-            }
-
-            DGV_Rolls.AllowUserToAddRows = false;
-            DGV_Rolls.AllowUserToDeleteRows = false;
-            DGV_Rolls.AllowUserToOrderColumns = true;
-            DGV_Rolls.MultiSelect = false;
-            DGV_Rolls.EditMode = DataGridViewEditMode.EditOnF2;
-            DGV_Rolls.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            DGV_Rolls.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders; // Appears that this line should be `AllCells` to avoid the problem you are facing
-            DGV_Rolls.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DGV_Rolls.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-                     
-            DGV_Rolls.DataSource = RollTable;
-        }
-
+        #endregion
         private void openChSheet(object sender, EventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
             FileIO.OpenFileWithDefault(fileDialog.FileName);
         }
-
         private void addCustomRoll(object sender, EventArgs e)
         {
             //var roll = new CustomRoll();
@@ -229,28 +441,6 @@ namespace DnD
             CustomRollForm.Show();
             CustomRollForm.ParametersSet += new EventHandler(AddNewRollToTable);
         }
-
-        private void AddNewRollToTable(object sender, EventArgs e)
-        {
-            AddRowToTable();
-        }
-
-        private void AddRowToTable()
-        {
-            //This method is very poorly written/susceptible to breaking when/if more fields are added
-            var parameters = CustomRollForm.GetRollParameters();
-
-            DataRow RollRow = RollTable.NewRow();
-            //  var fields = parameters.NumberOfFields;
-            RollRow[0] = parameters.RollName;
-            RollRow[1] = parameters.RollString;
-            RollRow[2] = parameters.Description;
-            RollTable.Rows.Add(RollRow);
-
-            CustomRollForm.Dispose();
-        }
-
-
         private void btn_modifyCustomRoll_Click(object sender, EventArgs e)
         {
             //Solution sa = new Solution();
@@ -260,81 +450,36 @@ namespace DnD
             ////   fuck[2] = new int[3] { 0,1,1 };
             //sa.OrangesRotting(fuck);\
         }
+        //private void GUIRolls(RollTypes roll, int RowID) ///WORK IN PROGRESS
+        //{
+        //    DataTable dt;
+        //    string Total;
+        //    int rollRow;
+        //    if (roll == RollTypes.CustomRoll)
+        //    {
+        //        dt = RollTable;
+        //        rollRow = 1;
+        //        (Total, string[] IndividualRolls) = ParseRoll(RollToParse);
+        //        var FinalResult = CombineTotalAndIndivRolls(Total, IndividualRolls);
 
-        static DataTable LoadTable()
-        {
-            var systemPath = System.Environment.
-                 GetFolderPath(
-                     Environment.SpecialFolder.CommonApplicationData
-                 );
-            var complete = Path.Combine(systemPath, "rolls.csv");
-
-            var data = FileIO.LoadCSV(complete);
-            var headerData = data[0].Split(',');
-            int NumberOfColumns = headerData.Length;
-            DataTable RollHolder = new DataTable();
-            DataColumn column;
-            for (int col = 0; col < NumberOfColumns; col++)
-            {
-                column = new DataColumn
-                {
-                    Caption = headerData[col],
-                    ColumnName = headerData[col]
-                };
-                RollHolder.Columns.Add(column);
-            }
-
-            int NumberOfRows = data.Length;
-            for (int row = 1; row < NumberOfRows; row++)
-            {
-                var rollData = data[row].Split(',');
-                DataRow RollRow = RollHolder.NewRow();
-
-                for (int i = 0; i < NumberOfColumns; i++)
-                {
-                    RollRow[i] = rollData[i];
-                }
-                RollHolder.Rows.Add(RollRow);
-            }
-
-            return RollHolder;
-        }
-
-        private void TriggerCustomRoll(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            int SelectedRow = e.RowIndex;
-            var row = RollTable.Rows[SelectedRow];
-            var RollToParse = row[1].ToString();
-
-            var (Total, IndividualRolls) = parseRoll(RollToParse);
-
-            var finalResult = CombineTotalAndIndivRolls(Total, IndividualRolls);
-
-            //Label finalTotal = new Label
-            //{
-            //    Text = Total
-            //};
-            //flp_DGV.Controls.Add(finalTotal);
+        //        lbl_FinalRoll.Text = Total;
+        //        lbl_TableRoll.Text = FinalResult;
+        //    }
+        //    else if (roll == RollTypes.SavingThrowRoll)
+        //    {
+        //        dt = SavingThrowsTable;
+        //        rollRow = 1;
+        //    }
+        //    else
+        //    {
+        //        dt = SkillsTable;
+        //        rollRow = 1;
+        //    }
+        //    var row = dt.Rows[RowID];
+        //    var RollToParse = row[rollRow].ToString();
+        //}
 
 
-            lbl_TableRoll.Text = finalResult;
-        }
-
-        private string CombineTotalAndIndivRolls(string total, string[] indivRoll)
-        {
-            var sb = new StringBuilder();
-            sb.Append(total + "    (");
-            int numOfRolls = indivRoll.Length;
-            for (int i =0; i<numOfRolls; i++)
-            {
-                sb.Append(indivRoll[i] + ", ");
-            }
-            int sbLength = sb.Length;
-            sb.Remove(sbLength - 2, 2); //Removes the extra comma at the end
-
-            sb.Append(")");
-            return sb.ToString();
-        }
 
         private void btn_deleteCustomRoll_Click(object sender, EventArgs e)
         {
