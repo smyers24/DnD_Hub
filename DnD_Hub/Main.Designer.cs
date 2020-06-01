@@ -45,6 +45,8 @@
             this.label_d20Result = new System.Windows.Forms.Label();
             this.chkbox_d20Vantage = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.lbl_TableRoll = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.panel_d10 = new System.Windows.Forms.Panel();
             this.tb_d10Qty = new System.Windows.Forms.TextBox();
@@ -88,10 +90,6 @@
             this.btn_rollDiceBox = new System.Windows.Forms.Button();
             this.btn_ManualRoll = new System.Windows.Forms.Button();
             this.label_manualRollResult = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.rollChest = new System.Windows.Forms.ListBox();
             this.btn_openCharSheet = new System.Windows.Forms.Button();
             this.characterGroupBox = new System.Windows.Forms.GroupBox();
             this.tb_charHPmax = new System.Windows.Forms.TextBox();
@@ -110,8 +108,7 @@
             this.tab_overview = new System.Windows.Forms.TabPage();
             this.tab_map = new System.Windows.Forms.TabPage();
             this.mapBrowser = new System.Windows.Forms.WebBrowser();
-            this.label14 = new System.Windows.Forms.Label();
-            this.lbl_TableRoll = new System.Windows.Forms.Label();
+            this.flp_DGV = new System.Windows.Forms.FlowLayoutPanel();
             this.rollGroupBox.SuspendLayout();
             this.diceGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Rolls)).BeginInit();
@@ -121,7 +118,6 @@
             this.panel_d12.SuspendLayout();
             this.panel_d4.SuspendLayout();
             this.panel_d8.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.characterGroupBox.SuspendLayout();
             this.fileGroupBox.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -135,13 +131,14 @@
             this.rollGroupBox.Controls.Add(this.label_manualRollResult);
             this.rollGroupBox.Location = new System.Drawing.Point(22, 208);
             this.rollGroupBox.Name = "rollGroupBox";
-            this.rollGroupBox.Size = new System.Drawing.Size(642, 588);
+            this.rollGroupBox.Size = new System.Drawing.Size(642, 512);
             this.rollGroupBox.TabIndex = 2;
             this.rollGroupBox.TabStop = false;
             this.rollGroupBox.Text = "Roll";
             // 
             // diceGroupBox
             // 
+            this.diceGroupBox.Controls.Add(this.flp_DGV);
             this.diceGroupBox.Controls.Add(this.DGV_Rolls);
             this.diceGroupBox.Controls.Add(this.label13);
             this.diceGroupBox.Controls.Add(this.label_manualTotal);
@@ -166,7 +163,7 @@
             this.diceGroupBox.Controls.Add(this.btn_ManualRoll);
             this.diceGroupBox.Location = new System.Drawing.Point(6, 19);
             this.diceGroupBox.Name = "diceGroupBox";
-            this.diceGroupBox.Size = new System.Drawing.Size(618, 563);
+            this.diceGroupBox.Size = new System.Drawing.Size(618, 481);
             this.diceGroupBox.TabIndex = 7;
             this.diceGroupBox.TabStop = false;
             this.diceGroupBox.Text = "Dice Box";
@@ -181,7 +178,7 @@
             this.DGV_Rolls.MultiSelect = false;
             this.DGV_Rolls.Name = "DGV_Rolls";
             this.DGV_Rolls.Size = new System.Drawing.Size(596, 178);
-            this.DGV_Rolls.TabIndex = 9;
+            this.DGV_Rolls.TabIndex = 26;
             this.DGV_Rolls.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.TriggerCustomRoll);
             // 
             // label13
@@ -221,6 +218,8 @@
             // cb_saveRoll
             // 
             this.cb_saveRoll.AutoSize = true;
+            this.cb_saveRoll.Checked = true;
+            this.cb_saveRoll.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_saveRoll.Location = new System.Drawing.Point(200, 399);
             this.cb_saveRoll.Name = "cb_saveRoll";
             this.cb_saveRoll.Size = new System.Drawing.Size(73, 17);
@@ -246,14 +245,14 @@
             this.tb_d20Qty.Location = new System.Drawing.Point(3, 3);
             this.tb_d20Qty.Name = "tb_d20Qty";
             this.tb_d20Qty.Size = new System.Drawing.Size(40, 20);
-            this.tb_d20Qty.TabIndex = 5;
+            this.tb_d20Qty.TabIndex = 22;
             // 
             // btn_d20
             // 
             this.btn_d20.Location = new System.Drawing.Point(65, 0);
             this.btn_d20.Name = "btn_d20";
             this.btn_d20.Size = new System.Drawing.Size(75, 23);
-            this.btn_d20.TabIndex = 1;
+            this.btn_d20.TabIndex = 23;
             this.btn_d20.Text = "d20";
             this.btn_d20.UseVisualStyleBackColor = true;
             this.btn_d20.Click += new System.EventHandler(this.clickManualRoll);
@@ -272,7 +271,7 @@
             this.tb_d20Mod.Location = new System.Drawing.Point(168, 4);
             this.tb_d20Mod.Name = "tb_d20Mod";
             this.tb_d20Mod.Size = new System.Drawing.Size(31, 20);
-            this.tb_d20Mod.TabIndex = 5;
+            this.tb_d20Mod.TabIndex = 24;
             // 
             // label_d20Result
             // 
@@ -285,6 +284,7 @@
             // chkbox_d20Vantage
             // 
             this.chkbox_d20Vantage.AutoSize = true;
+            this.chkbox_d20Vantage.Enabled = false;
             this.chkbox_d20Vantage.Location = new System.Drawing.Point(205, 5);
             this.chkbox_d20Vantage.Name = "chkbox_d20Vantage";
             this.chkbox_d20Vantage.Size = new System.Drawing.Size(65, 17);
@@ -300,6 +300,24 @@
             this.label11.Size = new System.Drawing.Size(151, 13);
             this.label11.TabIndex = 4;
             this.label11.Text = "Select a cell and hit \'F2\' to edit";
+            // 
+            // lbl_TableRoll
+            // 
+            this.lbl_TableRoll.AutoSize = true;
+            this.lbl_TableRoll.Location = new System.Drawing.Point(58, 333);
+            this.lbl_TableRoll.Name = "lbl_TableRoll";
+            this.lbl_TableRoll.Size = new System.Drawing.Size(37, 13);
+            this.lbl_TableRoll.TabIndex = 4;
+            this.lbl_TableRoll.Text = "Total: ";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(15, 333);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(37, 13);
+            this.label14.TabIndex = 4;
+            this.label14.Text = "Total: ";
             // 
             // label10
             // 
@@ -328,14 +346,14 @@
             this.tb_d10Qty.Location = new System.Drawing.Point(3, 4);
             this.tb_d10Qty.Name = "tb_d10Qty";
             this.tb_d10Qty.Size = new System.Drawing.Size(40, 20);
-            this.tb_d10Qty.TabIndex = 5;
+            this.tb_d10Qty.TabIndex = 16;
             // 
             // btn_d10
             // 
             this.btn_d10.Location = new System.Drawing.Point(65, 0);
             this.btn_d10.Name = "btn_d10";
             this.btn_d10.Size = new System.Drawing.Size(75, 23);
-            this.btn_d10.TabIndex = 1;
+            this.btn_d10.TabIndex = 17;
             this.btn_d10.Text = "d10";
             this.btn_d10.UseVisualStyleBackColor = true;
             this.btn_d10.Click += new System.EventHandler(this.clickManualRoll);
@@ -354,7 +372,7 @@
             this.tb_d10Mod.Location = new System.Drawing.Point(168, 5);
             this.tb_d10Mod.Name = "tb_d10Mod";
             this.tb_d10Mod.Size = new System.Drawing.Size(31, 20);
-            this.tb_d10Mod.TabIndex = 5;
+            this.tb_d10Mod.TabIndex = 18;
             // 
             // label_d10Result
             // 
@@ -367,6 +385,7 @@
             // chkbox_d10Vantage
             // 
             this.chkbox_d10Vantage.AutoSize = true;
+            this.chkbox_d10Vantage.Enabled = false;
             this.chkbox_d10Vantage.Location = new System.Drawing.Point(205, 6);
             this.chkbox_d10Vantage.Name = "chkbox_d10Vantage";
             this.chkbox_d10Vantage.Size = new System.Drawing.Size(65, 17);
@@ -399,7 +418,7 @@
             this.btn_d6.Location = new System.Drawing.Point(63, 1);
             this.btn_d6.Name = "btn_d6";
             this.btn_d6.Size = new System.Drawing.Size(75, 23);
-            this.btn_d6.TabIndex = 1;
+            this.btn_d6.TabIndex = 11;
             this.btn_d6.Text = "d6";
             this.btn_d6.UseVisualStyleBackColor = true;
             this.btn_d6.Click += new System.EventHandler(this.clickManualRoll);
@@ -409,7 +428,7 @@
             this.tb_d6Qty.Location = new System.Drawing.Point(2, 3);
             this.tb_d6Qty.Name = "tb_d6Qty";
             this.tb_d6Qty.Size = new System.Drawing.Size(40, 20);
-            this.tb_d6Qty.TabIndex = 5;
+            this.tb_d6Qty.TabIndex = 10;
             // 
             // label5
             // 
@@ -425,7 +444,7 @@
             this.tb_d6Mod.Location = new System.Drawing.Point(167, 4);
             this.tb_d6Mod.Name = "tb_d6Mod";
             this.tb_d6Mod.Size = new System.Drawing.Size(31, 20);
-            this.tb_d6Mod.TabIndex = 5;
+            this.tb_d6Mod.TabIndex = 12;
             // 
             // label_d6Result
             // 
@@ -438,6 +457,7 @@
             // chkbox_d6Vantage
             // 
             this.chkbox_d6Vantage.AutoSize = true;
+            this.chkbox_d6Vantage.Enabled = false;
             this.chkbox_d6Vantage.Location = new System.Drawing.Point(204, 5);
             this.chkbox_d6Vantage.Name = "chkbox_d6Vantage";
             this.chkbox_d6Vantage.Size = new System.Drawing.Size(65, 17);
@@ -463,14 +483,14 @@
             this.tb_d12Qty.Location = new System.Drawing.Point(3, 4);
             this.tb_d12Qty.Name = "tb_d12Qty";
             this.tb_d12Qty.Size = new System.Drawing.Size(40, 20);
-            this.tb_d12Qty.TabIndex = 5;
+            this.tb_d12Qty.TabIndex = 19;
             // 
             // btn_d12
             // 
             this.btn_d12.Location = new System.Drawing.Point(65, 1);
             this.btn_d12.Name = "btn_d12";
             this.btn_d12.Size = new System.Drawing.Size(75, 23);
-            this.btn_d12.TabIndex = 1;
+            this.btn_d12.TabIndex = 20;
             this.btn_d12.Text = "d12";
             this.btn_d12.UseVisualStyleBackColor = true;
             this.btn_d12.Click += new System.EventHandler(this.clickManualRoll);
@@ -489,7 +509,7 @@
             this.tb_d12Mod.Location = new System.Drawing.Point(168, 4);
             this.tb_d12Mod.Name = "tb_d12Mod";
             this.tb_d12Mod.Size = new System.Drawing.Size(31, 20);
-            this.tb_d12Mod.TabIndex = 5;
+            this.tb_d12Mod.TabIndex = 21;
             // 
             // label_d12Result
             // 
@@ -502,6 +522,7 @@
             // chkbox_d12Vantage
             // 
             this.chkbox_d12Vantage.AutoSize = true;
+            this.chkbox_d12Vantage.Enabled = false;
             this.chkbox_d12Vantage.Location = new System.Drawing.Point(205, 5);
             this.chkbox_d12Vantage.Name = "chkbox_d12Vantage";
             this.chkbox_d12Vantage.Size = new System.Drawing.Size(65, 17);
@@ -514,7 +535,7 @@
             this.btn_addCustomRoll.Location = new System.Drawing.Point(331, 388);
             this.btn_addCustomRoll.Name = "btn_addCustomRoll";
             this.btn_addCustomRoll.Size = new System.Drawing.Size(75, 23);
-            this.btn_addCustomRoll.TabIndex = 3;
+            this.btn_addCustomRoll.TabIndex = 27;
             this.btn_addCustomRoll.Text = "Add";
             this.btn_addCustomRoll.UseVisualStyleBackColor = true;
             this.btn_addCustomRoll.Click += new System.EventHandler(this.addCustomRoll);
@@ -524,7 +545,7 @@
             this.btn_modifyCustomRoll.Location = new System.Drawing.Point(423, 388);
             this.btn_modifyCustomRoll.Name = "btn_modifyCustomRoll";
             this.btn_modifyCustomRoll.Size = new System.Drawing.Size(75, 23);
-            this.btn_modifyCustomRoll.TabIndex = 3;
+            this.btn_modifyCustomRoll.TabIndex = 28;
             this.btn_modifyCustomRoll.Text = "Modify";
             this.btn_modifyCustomRoll.UseVisualStyleBackColor = true;
             this.btn_modifyCustomRoll.Click += new System.EventHandler(this.btn_modifyCustomRoll_Click);
@@ -547,21 +568,21 @@
             this.tb_d4Qty.Location = new System.Drawing.Point(3, 3);
             this.tb_d4Qty.Name = "tb_d4Qty";
             this.tb_d4Qty.Size = new System.Drawing.Size(40, 20);
-            this.tb_d4Qty.TabIndex = 5;
+            this.tb_d4Qty.TabIndex = 7;
             // 
             // tb_d4Mod
             // 
             this.tb_d4Mod.Location = new System.Drawing.Point(167, 3);
             this.tb_d4Mod.Name = "tb_d4Mod";
             this.tb_d4Mod.Size = new System.Drawing.Size(31, 20);
-            this.tb_d4Mod.TabIndex = 5;
+            this.tb_d4Mod.TabIndex = 9;
             // 
             // btn_d4
             // 
             this.btn_d4.Location = new System.Drawing.Point(63, 1);
             this.btn_d4.Name = "btn_d4";
             this.btn_d4.Size = new System.Drawing.Size(75, 23);
-            this.btn_d4.TabIndex = 1;
+            this.btn_d4.TabIndex = 8;
             this.btn_d4.Text = "d4";
             this.btn_d4.UseVisualStyleBackColor = true;
             this.btn_d4.Click += new System.EventHandler(this.clickManualRoll);
@@ -586,6 +607,7 @@
             // chkbox_d4Vantage
             // 
             this.chkbox_d4Vantage.AutoSize = true;
+            this.chkbox_d4Vantage.Enabled = false;
             this.chkbox_d4Vantage.Location = new System.Drawing.Point(204, 5);
             this.chkbox_d4Vantage.Name = "chkbox_d4Vantage";
             this.chkbox_d4Vantage.Size = new System.Drawing.Size(65, 17);
@@ -611,21 +633,21 @@
             this.tb_d8Qty.Location = new System.Drawing.Point(3, 0);
             this.tb_d8Qty.Name = "tb_d8Qty";
             this.tb_d8Qty.Size = new System.Drawing.Size(40, 20);
-            this.tb_d8Qty.TabIndex = 5;
+            this.tb_d8Qty.TabIndex = 13;
             // 
             // tb_d8Mod
             // 
             this.tb_d8Mod.Location = new System.Drawing.Point(168, 1);
             this.tb_d8Mod.Name = "tb_d8Mod";
             this.tb_d8Mod.Size = new System.Drawing.Size(31, 20);
-            this.tb_d8Mod.TabIndex = 5;
+            this.tb_d8Mod.TabIndex = 15;
             // 
             // btn_d8
             // 
             this.btn_d8.Location = new System.Drawing.Point(63, -2);
             this.btn_d8.Name = "btn_d8";
             this.btn_d8.Size = new System.Drawing.Size(75, 23);
-            this.btn_d8.TabIndex = 1;
+            this.btn_d8.TabIndex = 14;
             this.btn_d8.Text = "d8";
             this.btn_d8.UseVisualStyleBackColor = true;
             this.btn_d8.Click += new System.EventHandler(this.clickManualRoll);
@@ -650,6 +672,7 @@
             // chkbox_d8Vantage
             // 
             this.chkbox_d8Vantage.AutoSize = true;
+            this.chkbox_d8Vantage.Enabled = false;
             this.chkbox_d8Vantage.Location = new System.Drawing.Point(204, 2);
             this.chkbox_d8Vantage.Name = "chkbox_d8Vantage";
             this.chkbox_d8Vantage.Size = new System.Drawing.Size(65, 17);
@@ -662,16 +685,17 @@
             this.btn_deleteCustomRoll.Location = new System.Drawing.Point(518, 388);
             this.btn_deleteCustomRoll.Name = "btn_deleteCustomRoll";
             this.btn_deleteCustomRoll.Size = new System.Drawing.Size(75, 23);
-            this.btn_deleteCustomRoll.TabIndex = 3;
+            this.btn_deleteCustomRoll.TabIndex = 29;
             this.btn_deleteCustomRoll.Text = "Delete";
             this.btn_deleteCustomRoll.UseVisualStyleBackColor = true;
+            this.btn_deleteCustomRoll.Click += new System.EventHandler(this.btn_deleteCustomRoll_Click);
             // 
             // btn_rollDiceBox
             // 
             this.btn_rollDiceBox.Location = new System.Drawing.Point(15, 118);
             this.btn_rollDiceBox.Name = "btn_rollDiceBox";
             this.btn_rollDiceBox.Size = new System.Drawing.Size(75, 23);
-            this.btn_rollDiceBox.TabIndex = 3;
+            this.btn_rollDiceBox.TabIndex = 25;
             this.btn_rollDiceBox.Text = "Roll";
             this.btn_rollDiceBox.UseVisualStyleBackColor = true;
             this.btn_rollDiceBox.Click += new System.EventHandler(this.rollConcat);
@@ -681,7 +705,7 @@
             this.btn_ManualRoll.Location = new System.Drawing.Point(15, 449);
             this.btn_ManualRoll.Name = "btn_ManualRoll";
             this.btn_ManualRoll.Size = new System.Drawing.Size(75, 23);
-            this.btn_ManualRoll.TabIndex = 3;
+            this.btn_ManualRoll.TabIndex = 30;
             this.btn_ManualRoll.Text = "Manual Roll";
             this.btn_ManualRoll.UseVisualStyleBackColor = true;
             this.btn_ManualRoll.Click += new System.EventHandler(this.manualRollString);
@@ -693,54 +717,12 @@
             this.label_manualRollResult.Size = new System.Drawing.Size(100, 23);
             this.label_manualRollResult.TabIndex = 11;
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.radioButton2);
-            this.panel1.Controls.Add(this.radioButton1);
-            this.panel1.Location = new System.Drawing.Point(796, 544);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 100);
-            this.panel1.TabIndex = 8;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(29, 39);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(91, 17);
-            this.radioButton2.TabIndex = 0;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Disadvantage";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(29, 16);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(77, 17);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Advantage";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // rollChest
-            // 
-            this.rollChest.ColumnWidth = 50;
-            this.rollChest.FormattingEnabled = true;
-            this.rollChest.Location = new System.Drawing.Point(734, 345);
-            this.rollChest.MultiColumn = true;
-            this.rollChest.Name = "rollChest";
-            this.rollChest.Size = new System.Drawing.Size(262, 95);
-            this.rollChest.TabIndex = 4;
-            this.rollChest.DoubleClick += new System.EventHandler(this.ropenItemFromList);
-            // 
             // btn_openCharSheet
             // 
             this.btn_openCharSheet.Location = new System.Drawing.Point(14, 134);
             this.btn_openCharSheet.Name = "btn_openCharSheet";
             this.btn_openCharSheet.Size = new System.Drawing.Size(145, 23);
-            this.btn_openCharSheet.TabIndex = 3;
+            this.btn_openCharSheet.TabIndex = 4;
             this.btn_openCharSheet.Text = "Open Character Sheet";
             this.btn_openCharSheet.UseVisualStyleBackColor = true;
             this.btn_openCharSheet.Click += new System.EventHandler(this.openChSheet);
@@ -768,21 +750,21 @@
             this.tb_charHPmax.Location = new System.Drawing.Point(113, 39);
             this.tb_charHPmax.Name = "tb_charHPmax";
             this.tb_charHPmax.Size = new System.Drawing.Size(46, 20);
-            this.tb_charHPmax.TabIndex = 5;
+            this.tb_charHPmax.TabIndex = 2;
             // 
             // tb_charAC
             // 
             this.tb_charAC.Location = new System.Drawing.Point(43, 65);
             this.tb_charAC.Name = "tb_charAC";
             this.tb_charAC.Size = new System.Drawing.Size(46, 20);
-            this.tb_charAC.TabIndex = 5;
+            this.tb_charAC.TabIndex = 3;
             // 
             // tb_charHPcurr
             // 
             this.tb_charHPcurr.Location = new System.Drawing.Point(43, 39);
             this.tb_charHPcurr.Name = "tb_charHPcurr";
             this.tb_charHPcurr.Size = new System.Drawing.Size(46, 20);
-            this.tb_charHPcurr.TabIndex = 5;
+            this.tb_charHPcurr.TabIndex = 1;
             // 
             // label3
             // 
@@ -807,7 +789,7 @@
             this.tb_charName.Location = new System.Drawing.Point(43, 17);
             this.tb_charName.Name = "tb_charName";
             this.tb_charName.Size = new System.Drawing.Size(116, 20);
-            this.tb_charName.TabIndex = 5;
+            this.tb_charName.TabIndex = 0;
             // 
             // label2
             // 
@@ -853,7 +835,7 @@
             this.mapSelection.Location = new System.Drawing.Point(46, 149);
             this.mapSelection.Name = "mapSelection";
             this.mapSelection.Size = new System.Drawing.Size(108, 23);
-            this.mapSelection.TabIndex = 3;
+            this.mapSelection.TabIndex = 6;
             this.mapSelection.Text = "Open Map";
             this.mapSelection.UseVisualStyleBackColor = true;
             this.mapSelection.Click += new System.EventHandler(this.openMap);
@@ -863,7 +845,7 @@
             this.openListBtn.Location = new System.Drawing.Point(46, 19);
             this.openListBtn.Name = "openListBtn";
             this.openListBtn.Size = new System.Drawing.Size(108, 23);
-            this.openListBtn.TabIndex = 3;
+            this.openListBtn.TabIndex = 5;
             this.openListBtn.Text = "Open List of Things";
             this.openListBtn.UseVisualStyleBackColor = true;
             this.openListBtn.Click += new System.EventHandler(this.openListOfThings);
@@ -875,20 +857,18 @@
             this.tabControl.Location = new System.Drawing.Point(12, 12);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1140, 828);
+            this.tabControl.Size = new System.Drawing.Size(990, 765);
             this.tabControl.TabIndex = 5;
             // 
             // tab_overview
             // 
             this.tab_overview.Controls.Add(this.characterGroupBox);
             this.tab_overview.Controls.Add(this.fileGroupBox);
-            this.tab_overview.Controls.Add(this.rollChest);
             this.tab_overview.Controls.Add(this.rollGroupBox);
-            this.tab_overview.Controls.Add(this.panel1);
             this.tab_overview.Location = new System.Drawing.Point(4, 22);
             this.tab_overview.Name = "tab_overview";
             this.tab_overview.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_overview.Size = new System.Drawing.Size(1132, 802);
+            this.tab_overview.Size = new System.Drawing.Size(982, 739);
             this.tab_overview.TabIndex = 0;
             this.tab_overview.Text = "Overview";
             this.tab_overview.UseVisualStyleBackColor = true;
@@ -899,7 +879,7 @@
             this.tab_map.Location = new System.Drawing.Point(4, 22);
             this.tab_map.Name = "tab_map";
             this.tab_map.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_map.Size = new System.Drawing.Size(1132, 802);
+            this.tab_map.Size = new System.Drawing.Size(674, 739);
             this.tab_map.TabIndex = 1;
             this.tab_map.Text = "Map";
             this.tab_map.UseVisualStyleBackColor = true;
@@ -910,33 +890,23 @@
             this.mapBrowser.Location = new System.Drawing.Point(3, 3);
             this.mapBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.mapBrowser.Name = "mapBrowser";
-            this.mapBrowser.Size = new System.Drawing.Size(1126, 796);
+            this.mapBrowser.Size = new System.Drawing.Size(668, 733);
             this.mapBrowser.TabIndex = 0;
             // 
-            // label14
+            // flp_DGV
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(15, 333);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(37, 13);
-            this.label14.TabIndex = 4;
-            this.label14.Text = "Total: ";
-            // 
-            // lbl_TableRoll
-            // 
-            this.lbl_TableRoll.AutoSize = true;
-            this.lbl_TableRoll.Location = new System.Drawing.Point(58, 333);
-            this.lbl_TableRoll.Name = "lbl_TableRoll";
-            this.lbl_TableRoll.Size = new System.Drawing.Size(37, 13);
-            this.lbl_TableRoll.TabIndex = 4;
-            this.lbl_TableRoll.Text = "Total: ";
+            this.flp_DGV.Location = new System.Drawing.Point(177, 333);
+            this.flp_DGV.Name = "flp_DGV";
+            this.flp_DGV.Size = new System.Drawing.Size(294, 26);
+            this.flp_DGV.TabIndex = 11;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(1152, 893);
+            this.ClientSize = new System.Drawing.Size(1000, 778);
             this.Controls.Add(this.tabControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
@@ -959,8 +929,6 @@
             this.panel_d4.PerformLayout();
             this.panel_d8.ResumeLayout(false);
             this.panel_d8.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.characterGroupBox.ResumeLayout(false);
             this.characterGroupBox.PerformLayout();
             this.fileGroupBox.ResumeLayout(false);
@@ -995,14 +963,10 @@
         private System.Windows.Forms.TabPage tab_map;
         private System.Windows.Forms.WebBrowser mapBrowser;
         private System.Windows.Forms.Button mapSelection;
-        private System.Windows.Forms.ListBox rollChest;
         private System.Windows.Forms.Button btn_addCustomRoll;
         private System.Windows.Forms.Button btn_modifyCustomRoll;
         private System.Windows.Forms.Button btn_deleteCustomRoll;
         private System.Windows.Forms.GroupBox diceGroupBox;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.CheckBox chkbox_d20Vantage;
         private System.Windows.Forms.CheckBox chkbox_d12Vantage;
         private System.Windows.Forms.CheckBox chkbox_d10Vantage;
@@ -1055,6 +1019,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label lbl_TableRoll;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.FlowLayoutPanel flp_DGV;
     }
 }
 

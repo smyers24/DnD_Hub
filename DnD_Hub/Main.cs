@@ -204,8 +204,9 @@ namespace DnD
             }
 
             DGV_Rolls.AllowUserToAddRows = false;
-            DGV_Rolls.AllowUserToDeleteRows = true;
+            DGV_Rolls.AllowUserToDeleteRows = false;
             DGV_Rolls.AllowUserToOrderColumns = true;
+            DGV_Rolls.MultiSelect = false;
             DGV_Rolls.EditMode = DataGridViewEditMode.EditOnF2;
             DGV_Rolls.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DGV_Rolls.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders; // Appears that this line should be `AllCells` to avoid the problem you are facing
@@ -308,23 +309,37 @@ namespace DnD
             var (Total, IndividualRolls) = parseRoll(RollToParse);
 
             var finalResult = CombineTotalAndIndivRolls(Total, IndividualRolls);
+
+            //Label finalTotal = new Label
+            //{
+            //    Text = Total
+            //};
+            //flp_DGV.Controls.Add(finalTotal);
+
+
             lbl_TableRoll.Text = finalResult;
         }
 
         private string CombineTotalAndIndivRolls(string total, string[] indivRoll)
         {
             var sb = new StringBuilder();
-            sb.Append(total + " (");
+            sb.Append(total + "    (");
             int numOfRolls = indivRoll.Length;
             for (int i =0; i<numOfRolls; i++)
             {
-                sb.Append(indivRoll[i] + " ,");
+                sb.Append(indivRoll[i] + ", ");
             }
             int sbLength = sb.Length;
-            sb.Remove(sbLength - 1, 1); //Removes the extra comma at the end
+            sb.Remove(sbLength - 2, 2); //Removes the extra comma at the end
 
             sb.Append(")");
             return sb.ToString();
+        }
+
+        private void btn_deleteCustomRoll_Click(object sender, EventArgs e)
+        {
+            var selectedCell = DGV_Rolls.CurrentRow;
+            DGV_Rolls.Rows.Remove(selectedCell); //Remove 0 because MultiSelect is disabled
         }
     }
 }
