@@ -47,11 +47,13 @@ namespace DnD
         }
         private void UnluckyTimerEvent(object sender, EventArgs e)
         {
+            /*
             Invoke(new Action(() =>
            {
                pb_Unlucky.Enabled = false;
                pb_Unlucky.Visible = false;
            }));
+           */
         }
         private void openListOfThings(object sender, EventArgs e)
         {
@@ -393,7 +395,7 @@ namespace DnD
                 int dieValue = int.Parse(panelSplit[1]);
                 string panelName = "panel_d" + dieValue;
                 string labelName = "label_d" + dieValue + "Result";
-
+                //Again, not proper practice. But it was a fun challenge
                 var label = this.Controls.Find(labelName, true).First();
                 panel_d4.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Qty")).First();
                 TextBox tb_Qty = panel.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Qty")).First();
@@ -412,6 +414,8 @@ namespace DnD
             string panelName = "panel_d" + dieValue;
             string labelName = "label_d" + dieValue + "Result";
 
+            //I know that none of this is proper practice, but I just wanted to see if I could do it
+            //Parsing based on control name is not ideal
             var panel = this.Controls.Find(panelName, true).First();
             var label = this.Controls.Find(labelName, true).First();
             panel_d4.Controls.OfType<TextBox>().Where(tb => tb.Name.Contains("Qty")).First();
@@ -420,35 +424,34 @@ namespace DnD
             int result = RollFunctions.RollCalc(tb_Qty.Text, dieValue, tb_Mod.Text);
             if (result == 1 & dieValue == 20 & string.IsNullOrEmpty(tb_Mod.Text))
             {
+                /*
+                critical fail easter egg
                 pb_Unlucky.Enabled = true;
                 pb_Unlucky.Visible = true;
                 var timer = new System.Timers.Timer(3500);
                 timer.Elapsed += UnluckyTimerEvent;
                 timer.Start();
+                */
             }
             lbl_FinalRoll.Text = result.ToString();
         }
         #endregion
         private void openChSheet(object sender, EventArgs e)
         {
+            //Open character sheet
             OpenFileDialog fileDialog = new OpenFileDialog();
             FileIO.OpenFileWithDefault(fileDialog.FileName);
         }
         private void addCustomRoll(object sender, EventArgs e)
         {
-            //var roll = new CustomRoll();
+            //Used to populate the custom roll table
             CustomRollForm = new CustomRollForm();
             CustomRollForm.Show();
             CustomRollForm.ParametersSet += new EventHandler(AddNewRollToTable);
         }
         private void btn_modifyCustomRoll_Click(object sender, EventArgs e)
         {
-            //Solution sa = new Solution();
-            //int[][] fuck = new int[1][];
-            //fuck[0] = new int[2] { 2, 1 };
-            ////   fuck[1] = new int[3] { 1,1,0 };
-            ////   fuck[2] = new int[3] { 0,1,1 };
-            //sa.OrangesRotting(fuck);\
+            //Needs proper implementation
         }
         //private void GUIRolls(RollTypes roll, int RowID) ///WORK IN PROGRESS
         //{
@@ -478,9 +481,7 @@ namespace DnD
         //    var row = dt.Rows[RowID];
         //    var RollToParse = row[rollRow].ToString();
         //}
-
-
-
+        
         private void btn_deleteCustomRoll_Click(object sender, EventArgs e)
         {
             var selectedCell = DGV_Rolls.CurrentRow;
