@@ -1,8 +1,7 @@
 # DnD_Hub
-
-## Features
-Main Screen <br>
 ![Overview](https://github.com/smyers24/DnD_Hub/raw/master/DnD_Hub/assets/HubMainScreen.png)
+## Features
+
 * Character Management
     * Save Name, HP, and AC between sessions
 * File Management
@@ -21,12 +20,12 @@ Main Screen <br>
     * Double-clicking the row will automatically perform the roll
     * Add/Modify/Delete rolls as desired
     * Rolls are saved to CSV at close and populated on launch
-![Custom roll table](https://github.com/smyers24/DnD_Hub/raw/master/DnD_Hub/assets/CustomRollBreakdown.png) <br>
-![Custom Roll Box](https://github.com/smyers24/DnD_Hub/raw/master/DnD_Hub/assets/CustomRollForm.png) <br>
+![Custom roll table](https://github.com/smyers24/DnD_Hub/raw/master/DnD_Hub/assets/CustomRollBreakdown.png) 
+![Custom Roll Box](https://github.com/smyers24/DnD_Hub/raw/master/DnD_Hub/assets/CustomRollForm.png) 
 ![Making custom roll](https://github.com/smyers24/DnD_Hub/raw/master/DnD_Hub/assets/NewlyAddedCustomRoll.png)
 
 * Manual Roll
-    * Type in a string and roll it. Option clear the box after rolling 
+    * Type in a string and roll it. Option clear the box after rolling     
 ![Manual roll](https://github.com/smyers24/DnD_Hub/raw/master/DnD_Hub/assets/ManualRoll.png)
 * Saving Throws
     * Parsed from CSV, populate table with saving throw names and modifiers
@@ -38,7 +37,7 @@ Main Screen <br>
 * Load the map in a tab (may be changed to pop-out later)
 * Most fields are saved on program close and loaded on program launch
 
-##TO-DO
+## TO-DO
 * Disadvantage/Advantage on rolls
     * Colors to show the two different rolls?
 * Modifier field
