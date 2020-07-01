@@ -14,7 +14,6 @@ Main Screen <br>
 	* Roll individual die or multiple dice at once
 	* Display individual results as well as total
 	* [WIP] Need to add (dis)advantage
-	<br>
     ![Dice box](https://github.com/smyers24/DnD_Hub/raw/master/DnD_Hub/assets/DiceBoxRoll.png)
 * Custom Roll Table
     * Parse from CSV to populate control with Name, Roll String , and Description
@@ -28,7 +27,6 @@ Main Screen <br>
 
 * Manual Roll <br>
     * Type in a string and roll it. Option clear the box after rolling 
-    <br>
     ![Manual roll](https://github.com/smyers24/DnD_Hub/raw/master/DnD_Hub/assets/ManualRoll.png)
 * Saving Throws
     * Parsed from CSV, populate table with saving throw names and modifiers
