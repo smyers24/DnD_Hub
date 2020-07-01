@@ -25,9 +25,9 @@ Main Screen <br>
 ![Custom Roll Box](https://github.com/smyers24/DnD_Hub/raw/master/DnD_Hub/assets/CustomRollForm.png) <br>
 ![Making custom roll](https://github.com/smyers24/DnD_Hub/raw/master/DnD_Hub/assets/NewlyAddedCustomRoll.png)
 
-* Manual Roll <br>
+* Manual Roll
     * Type in a string and roll it. Option clear the box after rolling 
-    ![Manual roll](https://github.com/smyers24/DnD_Hub/raw/master/DnD_Hub/assets/ManualRoll.png)
+![Manual roll](https://github.com/smyers24/DnD_Hub/raw/master/DnD_Hub/assets/ManualRoll.png)
 * Saving Throws
     * Parsed from CSV, populate table with saving throw names and modifiers
     * Double-click to roll
