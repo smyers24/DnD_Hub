@@ -1,4 +1,7 @@
 # DnD_Hub
+
+# See: https://github.com/smyers24/DnD-Hub-V2 for newer development. Will revisit this one eventually 
+
 ![Overview](https://github.com/smyers24/DnD_Hub/raw/master/DnD_Hub/assets/HubMainScreen.png)
 ## Features
 
